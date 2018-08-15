@@ -1,0 +1,189 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Outputs:
+  SubnetPubAId:
+    Description: SubnetPubAId
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}:SubnetPubA:Id
+    Value:
+      Ref: SubnetPubA
+  SubnetPubBId:
+    Description: SubnetPubBId
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}:SubnetPubB:Id
+    Value:
+      Ref: SubnetPubB
+  SubnetPvtAId:
+    Description: SubnetvtAId
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}:SubnetPvtA:Id
+    Value:
+      Ref: SubnetPvtA
+  SubnetPvtBId:
+    Description: SubnetPvtBId
+    Export:
+      Name:
+        Fn::Sub: ${AWS::StackName}:SubnetPvtB:Id
+    Value:
+      Ref: SubnetPvtB
+Parameters:
+  CidrBlock:
+    Default: 192.168.0.0/16
+    Description: CIDR block for environment
+    Type: String
+  SubnetPubACidr:
+    Default: 192.168.1.0/24
+    Description: CIDR block for environment
+    Type: String
+  SubnetPubBCidr:
+    Default: 192.168.3.0/24
+    Description: CIDR block for environment
+    Type: String
+  SubnetPvtACidr:
+    Default: 192.168.2.0/24
+    Description: CIDR block for environment
+    Type: String
+  SubnetPvtBCidr:
+    Default: 192.168.4.0/24
+    Description: CIDR block for environment
+    Type: String
+Resources:
+  EIP:
+    Properties:
+      Domain: vpc
+    Type: AWS::EC2::EIP
+  EnvironmentVPC:
+    Properties:
+      CidrBlock:
+        Ref: CidrBlock
+      EnableDnsHostnames: 'false'
+      EnableDnsSupport: 'false'
+      InstanceTenancy: default
+    Type: AWS::EC2::VPC
+  GatewayToInternet:
+    Type: AWS::EC2::InternetGateway
+  InternetGatewayAttachment:
+    Properties:
+      InternetGatewayId:
+        Ref: GatewayToInternet
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::VPCGatewayAttachment
+  NatGateway:
+    Properties:
+      AllocationId:
+        Fn::GetAtt:
+        - EIP
+        - AllocationId
+      SubnetId:
+        Ref: SubnetPubA
+    Type: AWS::EC2::NatGateway
+  NatRoute:
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: NatGateway
+      RouteTableId:
+        Ref: PvtRouteTable
+    Type: AWS::EC2::Route
+  PubARouteTableAssociaton:
+    Properties:
+      RouteTableId:
+        Ref: PubRouteTable
+      SubnetId:
+        Ref: SubnetPubA
+    Type: AWS::EC2::SubnetRouteTableAssociation
+  PubBRouteTableAssociaton:
+    Properties:
+      RouteTableId:
+        Ref: PubRouteTable
+      SubnetId:
+        Ref: SubnetPubB
+    Type: AWS::EC2::SubnetRouteTableAssociation
+  PubRouteTable:
+    Properties:
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::RouteTable
+  PubToInternet:
+    DependsOn: GatewayToInternet
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: GatewayToInternet
+      RouteTableId:
+        Ref: PubRouteTable
+    Type: AWS::EC2::Route
+  PvtARouteTableAssociaton:
+    Properties:
+      RouteTableId:
+        Ref: PvtRouteTable
+      SubnetId:
+        Ref: SubnetPvtA
+    Type: AWS::EC2::SubnetRouteTableAssociation
+  PvtBRouteTableAssociaton:
+    Properties:
+      RouteTableId:
+        Ref: PvtRouteTable
+      SubnetId:
+        Ref: SubnetPvtB
+    Type: AWS::EC2::SubnetRouteTableAssociation
+  PvtRouteTable:
+    Properties:
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::RouteTable
+  SubnetPubA:
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - 0
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetPubACidr
+      MapPublicIpOnLaunch: true
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::Subnet
+  SubnetPubB:
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - 1
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetPubBCidr
+      MapPublicIpOnLaunch: true
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::Subnet
+  SubnetPvtA:
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - 0
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetPvtACidr
+      MapPublicIpOnLaunch: false
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::Subnet
+  SubnetPvtB:
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+        - 1
+        - Fn::GetAZs:
+            Ref: AWS::Region
+      CidrBlock:
+        Ref: SubnetPvtBCidr
+      MapPublicIpOnLaunch: false
+      VpcId:
+        Ref: EnvironmentVPC
+    Type: AWS::EC2::Subnet
