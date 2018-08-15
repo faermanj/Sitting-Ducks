@@ -16,7 +16,7 @@ This sample includes:
   the Flask application
 * setup.py - this file is used by Python's setuptools library to describe how
   your application will be packaged and installed
-* helloworld/ - this directory contains the Python source code for your Flask application
+* sducks/ - this directory contains the Python source code for your Flask application
 * tests/ - this directory contains unit tests for your application
 * .ebextensions/ - this directory contains the configuration files that allow
   AWS Elastic Beanstalk to deploy your application
@@ -45,7 +45,7 @@ AWS CodeStar user guide.
 
 2. Activate the virtual environment:
 
-        $ activate ./venv/bin/activate
+        $ source ./.venv/bin/activate
 
 3. Install Python dependencies for this project:
 
@@ -57,7 +57,7 @@ AWS CodeStar user guide.
 
 5. Start the Flask development server:
 
-        $ python helloworld/application.py --port 8000
+        $ python sducks/application.py --port 8000
 
 6. Open http://127.0.0.1:8000/ in a web browser to view the output of your
    service.

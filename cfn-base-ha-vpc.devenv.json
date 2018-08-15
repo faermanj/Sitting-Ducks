@@ -1,0 +1,22 @@
+[
+    {
+        "ParameterKey": "CidrBlock",
+        "ParameterValue": "10.0.0.0/16"
+    },
+    {
+        "ParameterKey": "SubnetPubACidr",
+        "ParameterValue": "10.0.1.0/24"
+    },
+    {
+        "ParameterKey": "SubnetPubBCidr",
+        "ParameterValue": "10.0.3.0/24"
+    },
+    {
+        "ParameterKey": "SubnetPvtACidr",
+        "ParameterValue": "10.0.2.0/24"
+    },
+    {
+        "ParameterKey": "SubnetPvtBCidr",
+        "ParameterValue": "10.0.4.0/24"
+    }
+]

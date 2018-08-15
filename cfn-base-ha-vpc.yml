@@ -1,0 +1,150 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CidrBlock:
+    Type: String
+    Default: 192.168.0.0/16
+    Description: CIDR block for environment
+  SubnetPubACidr:
+    Type: String
+    Default: 192.168.1.0/24
+    Description: CIDR block for environment
+  SubnetPubBCidr:
+    Type: String
+    Default: 192.168.3.0/24
+    Description: CIDR block for environment
+  SubnetPvtACidr:
+    Type: String
+    Default: 192.168.2.0/24
+    Description: CIDR block for environment
+  SubnetPvtBCidr:
+    Type: String
+    Default: 192.168.4.0/24
+    Description: CIDR block for environment            
+Resources:
+  EnvironmentVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CidrBlock
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      InstanceTenancy: default
+  SubnetPubA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+      CidrBlock: !Ref SubnetPubACidr
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select 
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+  SubnetPubB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+      CidrBlock: !Ref SubnetPubBCidr
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select 
+        - 1
+        - Fn::GetAZs: !Ref 'AWS::Region'
+  SubnetPvtA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+      CidrBlock: !Ref SubnetPvtACidr
+      MapPublicIpOnLaunch: false
+      AvailabilityZone: !Select 
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+  SubnetPvtB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+      CidrBlock: !Ref SubnetPvtBCidr
+      MapPublicIpOnLaunch: false
+      AvailabilityZone: !Select 
+        - 1
+        - Fn::GetAZs: !Ref 'AWS::Region'
+  GatewayToInternet:
+    Type: AWS::EC2::InternetGateway
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+      InternetGatewayId: !Ref GatewayToInternet
+  PubRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+  PvtRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref EnvironmentVPC
+  PubToInternet:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayToInternet
+    Properties:
+      RouteTableId: !Ref PubRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref GatewayToInternet
+  PubARouteTableAssociaton:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetPubA
+      RouteTableId: !Ref PubRouteTable
+  PubBRouteTableAssociaton:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetPubB
+      RouteTableId: !Ref PubRouteTable
+  PvtARouteTableAssociaton:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetPvtA
+      RouteTableId: !Ref PvtRouteTable
+  PvtBRouteTableAssociaton:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref SubnetPvtB
+      RouteTableId: !Ref PvtRouteTable                  
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId:
+        Fn::GetAtt:
+        - EIP
+        - AllocationId
+      SubnetId:
+        Ref: SubnetPubA
+  EIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+  NatRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: PvtRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: NatGateway
+Outputs:
+  SubnetPubAId:
+    Description: SubnetPubAId
+    Value: !Ref SubnetPubA
+    Export:
+      Name: !Sub ${AWS::StackName}:SubnetPubA:Id
+  SubnetPubBId:
+    Description: SubnetPubBId
+    Value: !Ref SubnetPubB
+    Export:
+      Name: !Sub ${AWS::StackName}:SubnetPubB:Id
+  SubnetPvtAId:
+    Description: SubnetvtAId
+    Value: !Ref SubnetPvtA
+    Export:
+      Name: !Sub ${AWS::StackName}:SubnetPvtA:Id
+  SubnetPvtBId:
+    Description: SubnetPvtBId
+    Value: !Ref SubnetPvtB
+    Export:
+      Name: !Sub ${AWS::StackName}:SubnetPvtB:Id
