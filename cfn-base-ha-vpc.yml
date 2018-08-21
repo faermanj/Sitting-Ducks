@@ -1,5 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
+  GalleryId:
+    Type: String
   CidrBlock:
     Type: String
     Default: 192.168.0.0/16
@@ -128,23 +130,28 @@ Resources:
       NatGatewayId:
         Ref: NatGateway
 Outputs:
+  VPCId:
+    Description: VPCId
+    Value: !Ref EnvironmentVPC
+    Export:
+      Name: !Sub ${GalleryId}:VPC:Id
   SubnetPubAId:
     Description: SubnetPubAId
     Value: !Ref SubnetPubA
     Export:
-      Name: !Sub ${AWS::StackName}:SubnetPubA:Id
+      Name: !Sub ${GalleryId}:SubnetPubA:Id
   SubnetPubBId:
     Description: SubnetPubBId
     Value: !Ref SubnetPubB
     Export:
-      Name: !Sub ${AWS::StackName}:SubnetPubB:Id
+      Name: !Sub ${GalleryId}:SubnetPubB:Id
   SubnetPvtAId:
     Description: SubnetvtAId
     Value: !Ref SubnetPvtA
     Export:
-      Name: !Sub ${AWS::StackName}:SubnetPvtA:Id
+      Name: !Sub ${GalleryId}:SubnetPvtA:Id
   SubnetPvtBId:
     Description: SubnetPvtBId
     Value: !Ref SubnetPvtB
     Export:
-      Name: !Sub ${AWS::StackName}:SubnetPvtB:Id
+      Name: !Sub ${GalleryId}:SubnetPvtB:Id

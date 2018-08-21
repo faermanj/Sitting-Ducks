@@ -1,4 +1,13 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform:
+- AWS::CodeStar
+
+Conditions:
+  UseSubnet: !Not [!Equals [!Ref 'SubnetId', subnet-none]]
+
 Parameters:
+  GalleryId:
+    Type: String
   ProjectId:
     Type: String
     Description: AWS CodeStar project ID used to name project resources and create roles.
@@ -10,10 +19,13 @@ Parameters:
     Description: The name of an existing Amazon EC2 key pair in the region where the project is created, which you can use to SSH into the new Amazon EC2 Linux instances.
   VpcId:
     Type: String
+    Default: Fn::ImportValue:
+              !Sub ${GalleryId}:VPC:Id
     Description: The ID of the Amazon Virtual Private Cloud (VPC) used for the new Amazon EC2 Linux instances.
   SubnetId:
     Type: String
-    Description: The name of the VPC subnet used for the new Amazon EC2 Linux instances launched for this project.
+    Default: Fn::ImportValue:
+              !Sub ${GalleryId}:SubnetPubA:Id
   SolutionStackName:
     Type: String
     Description: The software stack used to launch environments and configure instances in AWS Elastic Beanstalk.
@@ -24,16 +36,53 @@ Parameters:
     Type: String
     Description: The IAM role that will be created for the Amazon EC2 Linux instances.
 Resources:
-  BeanstalkFlask:
-    Type: AWS::CloudFormation::Stack
+  EBApplication:
+    Type: AWS::ElasticBeanstalk::Application
     Properties:
-      Parameters:
-        ProjectId: !Ref ProjectId
-        InstanceType: !Ref InstanceType
-        KeyPairName: !Ref KeyPairName
-        VpcId: !Ref VpcId
-        SubnetId: !Ref SubnetId
-        SolutionStackName: !Ref SolutionStackName
-        EBTrustRole: !Ref EBTrustRole
-        EBInstanceProfile: !Ref EBInstanceProfile
-      TemplateURL: cfn-beanstalk-flask.yml
+      ApplicationName: !Sub '${ProjectId}app'
+  EBApplicationVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName: !Ref 'EBApplication'
+      SourceBundle: '.'
+  EBConfigurationTemplate:
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+    Properties:
+      ApplicationName: !Ref 'EBApplication'
+      OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: SingleInstance
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: ServiceRole
+        Value: !Ref 'EBTrustRole'
+      - Namespace: aws:elasticbeanstalk:healthreporting:system
+        OptionName: SystemType
+        Value: enhanced
+      SolutionStackName: !Ref 'SolutionStackName'
+  EBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: !Ref 'EBApplication'
+      EnvironmentName: !Ref 'EBApplication'
+      TemplateName: !Ref 'EBConfigurationTemplate'
+      VersionLabel: !Ref 'EBApplicationVersion'
+      OptionSettings:
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: IamInstanceProfile
+        Value: !Ref 'EBInstanceProfile'
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: InstanceType
+        Value: !Ref 'InstanceType'
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: EC2KeyName
+        Value: !Ref 'KeyPairName'
+      - Namespace: aws:ec2:vpc
+        OptionName: VPCId
+        Value: !Ref 'VpcId'
+      - !If
+        - UseSubnet
+        - Namespace: 'aws:ec2:vpc'
+          OptionName: Subnets
+          Value: !Ref 'SubnetId'
+        - !Ref "AWS::NoValue"
