@@ -5,7 +5,7 @@ export COMPONENT_ID="base-ha-vpc"
 
 export UNIQUE=$(date '+%H%M%S')
 export GALLERY_ID="${GALLERY_ID:-devenv}"
-export STACK_NAME="${STACK_NAME:-$STACK_GROUP-$UNIQUE-$COMPONENT_ID}"
+export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$UNIQUE-$COMPONENT_ID}"
 
 aws cloudformation create-stack \
 --stack-name $STACK_NAME \
