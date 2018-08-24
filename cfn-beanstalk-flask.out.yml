@@ -1,9 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   GalleryId:
+    Default: devtest
     Type: String
   InstanceType:
-    Default: t2.small
+    Default: t2.micro
     Type: String
 Resources:
   EBApplication:
@@ -11,21 +12,17 @@ Resources:
       to deploy the correct application configuration.
     Properties:
       ApplicationName:
-        Fn::Sub: ${GalleryId}app2
+        Fn::Sub: ${GalleryId}app3
     Type: AWS::ElasticBeanstalk::Application
   EBApplicationVersion:
     Properties:
       ApplicationName:
         Ref: EBApplication
-      Description: The application version number.
       SourceBundle:
         S3Bucket: sitting-ducks-codebuild
-        S3Key: 936d7e2563b7d4c838cd956973dca00c
+        S3Key: 6f3e7118fdbbb19d498868159a131904
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBConfigurationTemplate:
-    Description: The AWS Elastic Beanstalk configuration template to be created for
-      this project, which defines configuration settings used to deploy different
-      versions of an application.
     Properties:
       ApplicationName:
         Ref: EBApplication
@@ -93,13 +90,9 @@ Resources:
             Service:
             - ec2.amazonaws.com
         Version: '2012-10-17'
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
+      - arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier
+      - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
       Path: /
-      Policies:
-      - PolicyDocument:
-          Statement:
-          - Action: '*'
-            Effect: Allow
-            Resource: '*'
-          Version: '2012-10-17'
-        PolicyName: donotdothisathome
     Type: AWS::IAM::Role

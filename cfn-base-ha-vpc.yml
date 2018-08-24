@@ -2,26 +2,22 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   GalleryId:
     Type: String
+    Default: devtest
   CidrBlock:
     Type: String
     Default: 192.168.0.0/16
-    Description: CIDR block for environment
   SubnetPubACidr:
     Type: String
     Default: 192.168.1.0/24
-    Description: CIDR block for environment
   SubnetPubBCidr:
     Type: String
     Default: 192.168.3.0/24
-    Description: CIDR block for environment
   SubnetPvtACidr:
     Type: String
     Default: 192.168.2.0/24
-    Description: CIDR block for environment
   SubnetPvtBCidr:
     Type: String
     Default: 192.168.4.0/24
-    Description: CIDR block for environment            
 Resources:
   EnvironmentVPC:
     Type: AWS::EC2::VPC

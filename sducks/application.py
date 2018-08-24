@@ -11,21 +11,29 @@ def get_static_text():
     return Response("hello world!", mimetype='text/plain', status=200)
 
 
-def rec_fib(n):
+def fib_rec(n):
     '''inefficient recursive function as defined, returns Fibonacci number'''
     if n > 1:
-        return rec_fib(n-1) + rec_fib(n-2)
+        return fib_rec(n-1) + fib_rec(n-2)
     return n
 
 
-@application.route('/fibo', methods=['GET'])
-def fibo():
-    x = int(request.args.get('x'))
-    if x:
-        resp = "fibo("+str(x)+") = "+str(rec_fib(x))
-    else:
-        resp = "fibo(x)"
-    return Response(resp, mimetype='text/plain', status=200)
+def ok(data):
+    return Response(str(data), mimetype='text/plain', status=200)
+
+
+def intArg(name, default=0):
+    try:
+        arg = request.args.get(name)
+        return int(arg) if arg else default
+    except ValueError:
+        return default
+
+
+@application.route('/fib_rec', methods=['GET'])
+def get_fib_rec():
+    x = intArg('x')
+    return ok(fib_rec(x))
 
 
 @application.route('/', methods=['GET'])

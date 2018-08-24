@@ -3,9 +3,10 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   GalleryId:
     Type: String
+    Default: devtest
   InstanceType:
     Type: String
-    Default: t2.small
+    Default: t2.micro
 
 Resources:
   EBInstanceProfileRole:
@@ -22,16 +23,11 @@ Resources:
             Action: 
               - "sts:AssumeRole"
       Path: /
-      Policies:
-        - 
-          PolicyName: "donotdothisathome"
-          PolicyDocument: 
-            Version: "2012-10-17"
-            Statement: 
-              - 
-                Effect: "Allow"
-                Action: "*"
-                Resource: "*"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
+
 
   EBInstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -44,7 +40,7 @@ Resources:
     Description: The AWS Elastic Beanstalk application, which is a container used to deploy the correct application configuration.
     Type: AWS::ElasticBeanstalk::Application
     Properties:
-      ApplicationName: !Sub '${GalleryId}app2'
+      ApplicationName: !Sub '${GalleryId}app3'
 
   EBApplicationVersion:
     Type: AWS::ElasticBeanstalk::ApplicationVersion
