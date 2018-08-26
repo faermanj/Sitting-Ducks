@@ -7,6 +7,12 @@ Parameters:
   AppName:
     Type: String
     Default: SittingDucks
+  AsgMinSize:
+    Type: String
+    Default: 2
+  AsgMaxSize:
+    Type: String
+    Default: 20
 
 Resources:
   EBInstanceProfileRole:
@@ -58,8 +64,13 @@ Resources:
         Value: "1 minute"
       - Namespace: aws:autoscaling:launchconfiguration
         OptionName: IamInstanceProfile
-        Value: !Ref EBInstanceProfile       
-
+        Value: !Ref EBInstanceProfile
+      - Namespace: aws:autoscaling:asg
+        OptionName: MinSize
+        Value: !Ref AsgMinSize
+      - Namespace: aws:autoscaling:asg
+        OptionName: MaxSize
+        Value: !Ref AsgMaxSize
 Outputs:
   EBApplicationName:
     Description: EBApplicationName

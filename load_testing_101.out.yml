@@ -1,0 +1,28 @@
+Parameters:
+  GalleryId:
+    Default: devtest
+    Type: String
+Resources:
+  BaseHAVPC:
+    Properties:
+      Parameters:
+        GalleryId:
+          Ref: GalleryId
+      TemplateURL: https://s3.amazonaws.com/sitting-ducks-codebuild/514c8b0d0caa5095a49221a098fb3fc8.template
+    Type: AWS::CloudFormation::Stack
+  BeanstalkApp:
+    DependsOn: BaseHAVPC
+    Properties:
+      Parameters:
+        GalleryId:
+          Ref: GalleryId
+      TemplateURL: https://s3.amazonaws.com/sitting-ducks-codebuild/9eb228ca5b3a032b373871072f767ac6.template
+    Type: AWS::CloudFormation::Stack
+  SmallDucks:
+    DependsOn: BeanstalkApp
+    Properties:
+      Parameters:
+        GalleryId:
+          Ref: GalleryId
+      TemplateURL: https://s3.amazonaws.com/sitting-ducks-codebuild/4fa1c89cb6f3f1ccb391b4073108dd13.template
+    Type: AWS::CloudFormation::Stack

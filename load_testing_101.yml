@@ -1,0 +1,25 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+Resources:
+  BaseHAVPC:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ./cfn-base-ha-vpc.yml
+      Parameters:
+        GalleryId: !Ref GalleryId  
+  BeanstalkApp:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BaseHAVPC
+    Properties:
+      TemplateURL: ./cfn-beanstalk-flask.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+  SmallDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
