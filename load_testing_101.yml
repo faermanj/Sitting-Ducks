@@ -1,7 +1,7 @@
 Parameters:
   GalleryId:
     Type: String
-    Default: devtest
+    Default: devnest
 Resources:
   BaseHAVPC:
     Type: AWS::CloudFormation::Stack
@@ -20,6 +20,6 @@ Resources:
     Type: AWS::CloudFormation::Stack
     DependsOn: BeanstalkApp
     Properties:
-      TemplateURL: ./cfn-beanstalk-env.yml
+      TemplateURL: ./cfn-beanstalk-env.out.yml
       Parameters:
         GalleryId: !Ref GalleryId
