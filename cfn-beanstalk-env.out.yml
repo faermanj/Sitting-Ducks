@@ -25,7 +25,7 @@ Resources:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
         S3Bucket: sitting-ducks-codebuild
-        S3Key: 57ddf6a298f4fc795c8bd9196a42256d
+        S3Key: bee755171961095f81cffc51d2f648dd
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:

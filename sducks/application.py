@@ -4,6 +4,12 @@ from flask import Flask, Response, request
 from sducks.flaskrun import flaskrun
 
 application = Flask(__name__, static_url_path='/static')
+version = "2018-08-26T164315"
+
+
+@application.route('/version', methods=['GET'])
+def get_version():
+    return Response(version, mimetype='text/plain', status=200)
 
 
 @application.route('/static-text', methods=['GET'])

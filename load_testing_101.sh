@@ -1,14 +1,22 @@
 #/bin/bash
 set -e
 
-export COMPONENT_ID="load-testing-101"
+export COMPONENT_ID="lt-101"
 export S3_BUCKET="sitting-ducks-codebuild"
 
 export UNIQUE=$(date '+%H%M%S')
-export GALLERY_ID="${GALLERY_ID:-devenv}"
-export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$UNIQUE-$COMPONENT_ID}"
+export GALLERY_ID="${GALLERY_ID:-devenv-$UNIQUE}"
+export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$COMPONENT_ID}"
 export SRC_TEMPLATE="load_testing_101.yml"
 export OUT_TEMPLATE="load_testing_101.out.yml"
+
+
+aws cloudformation package \
+--template "cfn-beanstalk-env.yml" \
+--s3-bucket $S3_BUCKET \
+--output-template-file "cfn-beanstalk-env.out.yml"
+
+cfn-lint -t "cfn-beanstalk-env.out.yml"
 
 aws cloudformation package \
 --template $SRC_TEMPLATE \

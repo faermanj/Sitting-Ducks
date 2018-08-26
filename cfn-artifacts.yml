@@ -1,0 +1,13 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+Resources:
+  ArtifactsBucket:
+    Type: AWS::S3::Bucket
+Outputs:
+  ArtifactsBucketName:
+    Description: ArtifactsBucketName
+    Value: !Ref ArtifactsBucket
+    Export:
+      Name: !Sub "${GalleryId}:ArtifactsBucketName"

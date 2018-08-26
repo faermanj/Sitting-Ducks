@@ -18,6 +18,12 @@ Parameters:
   AppName:
     Default: SittingDucks
     Type: String
+  AsgMaxSize:
+    Default: 20
+    Type: String
+  AsgMinSize:
+    Default: 2
+    Type: String
   GalleryId:
     Default: devtest
     Type: String
@@ -39,9 +45,20 @@ Resources:
         OptionName: SystemType
         Value: enhanced
       - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: MonitoringInterval
+        Value: 1 minute
+      - Namespace: aws:autoscaling:launchconfiguration
         OptionName: IamInstanceProfile
         Value:
           Ref: EBInstanceProfile
+      - Namespace: aws:autoscaling:asg
+        OptionName: MinSize
+        Value:
+          Ref: AsgMinSize
+      - Namespace: aws:autoscaling:asg
+        OptionName: MaxSize
+        Value:
+          Ref: AsgMaxSize
       SolutionStackName: 64bit Amazon Linux 2018.03 v2.7.3 running Python 3.6
     Type: AWS::ElasticBeanstalk::ConfigurationTemplate
   EBInstanceProfile:

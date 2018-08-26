@@ -24,5 +24,5 @@ Resources:
       Parameters:
         GalleryId:
           Ref: GalleryId
-      TemplateURL: https://s3.amazonaws.com/sitting-ducks-codebuild/f3c5f8dc305f83f0d8a093441f46fcbe.template
+      TemplateURL: https://s3.amazonaws.com/sitting-ducks-codebuild/3cfc604e3fb31ad5b2ce1911db2309a6.template
     Type: AWS::CloudFormation::Stack
