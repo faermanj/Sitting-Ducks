@@ -1,0 +1,65 @@
+Outputs:
+  EBEndpointURL:
+    Export:
+      Name:
+        Fn::Sub: ${GalleryId}:EB:${EnvName}:EndpointURL
+    Value:
+      Fn::GetAtt:
+      - EBEnvironment
+      - EndpointURL
+Parameters:
+  EnvName:
+    Default: aoienv
+    Type: String
+  GalleryId:
+    Default: devtest
+    Type: String
+  InstanceType:
+    Default: t2.micro
+    Type: String
+Resources:
+  EBApplicationVersion:
+    Properties:
+      ApplicationName:
+        Fn::ImportValue:
+          Fn::Sub: ${GalleryId}:EB:ApplicationName
+      SourceBundle:
+        S3Bucket: sitting-ducks-codebuild
+        S3Key: 57ddf6a298f4fc795c8bd9196a42256d
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+  EBEnvironment:
+    Properties:
+      ApplicationName:
+        Fn::ImportValue:
+          Fn::Sub: ${GalleryId}:EB:ApplicationName
+      Description: The application to be deployed to the environment.
+      EnvironmentName:
+        Ref: EnvName
+      OptionSettings:
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: InstanceType
+        Value:
+          Ref: InstanceType
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: EC2KeyName
+        Value: debugkp
+      - Namespace: aws:ec2:vpc
+        OptionName: VPCId
+        Value:
+          Fn::ImportValue:
+            Fn::Sub: ${GalleryId}:VPC:Id
+      - Namespace: aws:ec2:vpc
+        OptionName: Subnets
+        Value:
+          Fn::Join:
+          - ','
+          - - Fn::ImportValue:
+                Fn::Sub: ${GalleryId}:SubnetPubA:Id
+            - Fn::ImportValue:
+                Fn::Sub: ${GalleryId}:SubnetPubB:Id
+      TemplateName:
+        Fn::ImportValue:
+          Fn::Sub: ${GalleryId}:EB:ConfigurationTemplate
+      VersionLabel:
+        Ref: EBApplicationVersion
+    Type: AWS::ElasticBeanstalk::Environment

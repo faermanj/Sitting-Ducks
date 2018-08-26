@@ -11,8 +11,14 @@ def get_static_text():
     return Response("hello world!", mimetype='text/plain', status=200)
 
 
+def fib_iter(n):
+    a, b = 1, 1
+    for i in range(n-1):
+        a, b = b, a+b
+    return a
+
+
 def fib_rec(n):
-    '''inefficient recursive function as defined, returns Fibonacci number'''
     if n > 1:
         return fib_rec(n-1) + fib_rec(n-2)
     return n
@@ -33,7 +39,15 @@ def intArg(name, default=0):
 @application.route('/fib_rec', methods=['GET'])
 def get_fib_rec():
     x = intArg('x')
-    return ok(fib_rec(x))
+    body = fib_rec(x)
+    return ok(body)
+
+
+@application.route('/fib_iter', methods=['GET'])
+def get_fib_iter():
+    x = intArg('x')
+    body = fib_iter(x)
+    return ok(body)
 
 
 @application.route('/', methods=['GET'])

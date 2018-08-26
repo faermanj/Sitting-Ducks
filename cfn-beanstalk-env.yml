@@ -1,0 +1,57 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+  EnvName:
+    Type: String
+    Default: aoienv
+  InstanceType:
+    Type: String
+    Default: t2.micro
+
+Resources:
+  EBApplicationVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName:
+        Fn::ImportValue: 
+          !Sub "${GalleryId}:EB:ApplicationName"
+      SourceBundle: '.'
+
+  EBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: 
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ApplicationName"
+      EnvironmentName: !Ref EnvName
+      Description: The application to be deployed to the environment.
+      TemplateName:
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ConfigurationTemplate"
+      VersionLabel: !Ref 'EBApplicationVersion'
+      OptionSettings:
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: InstanceType
+        Value: !Ref 'InstanceType'
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: EC2KeyName
+        Value: debugkp
+      - Namespace: aws:ec2:vpc
+        OptionName: VPCId
+        Value:
+          Fn::ImportValue: 
+            !Sub "${GalleryId}:VPC:Id"
+      - Namespace: 'aws:ec2:vpc'
+        OptionName: Subnets
+        Value:
+          Fn::Join:
+          - ","
+          - - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
+            - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
+Outputs:
+  EBEndpointURL:
+    Value: !GetAtt EBEnvironment.EndpointURL
+    Export:
+      Name: !Sub "${GalleryId}:EB:${EnvName}:EndpointURL"
+

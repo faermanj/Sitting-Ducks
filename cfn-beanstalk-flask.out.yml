@@ -1,32 +1,36 @@
 AWSTemplateFormatVersion: 2010-09-09
+Outputs:
+  EBApplicationName:
+    Description: EBApplicationName
+    Export:
+      Name:
+        Fn::Sub: ${GalleryId}:EB:ApplicationName
+    Value:
+      Ref: EBApplication
+  EBTemplateName:
+    Description: EBConfigurationTemplate
+    Export:
+      Name:
+        Fn::Sub: ${GalleryId}:EB:ConfigurationTemplate
+    Value:
+      Ref: EBConfigurationTemplate
 Parameters:
+  AppName:
+    Default: SittingDucks
+    Type: String
   GalleryId:
     Default: devtest
     Type: String
-  InstanceType:
-    Default: t2.micro
-    Type: String
 Resources:
   EBApplication:
-    Description: The AWS Elastic Beanstalk application, which is a container used
-      to deploy the correct application configuration.
     Properties:
       ApplicationName:
-        Fn::Sub: ${GalleryId}app3
+        Fn::Sub: ${GalleryId}_${AppName}
     Type: AWS::ElasticBeanstalk::Application
-  EBApplicationVersion:
-    Properties:
-      ApplicationName:
-        Ref: EBApplication
-      SourceBundle:
-        S3Bucket: sitting-ducks-codebuild
-        S3Key: 6f3e7118fdbbb19d498868159a131904
-    Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBConfigurationTemplate:
     Properties:
       ApplicationName:
         Ref: EBApplication
-      Description: The name of the sample configuration template.
       OptionSettings:
       - Namespace: aws:elasticbeanstalk:environment
         OptionName: EnvironmentType
@@ -40,39 +44,6 @@ Resources:
           Ref: EBInstanceProfile
       SolutionStackName: 64bit Amazon Linux 2018.03 v2.7.3 running Python 3.6
     Type: AWS::ElasticBeanstalk::ConfigurationTemplate
-  EBEnvironment:
-    Description: The AWS Elastic Beanstalk deployment group where the application
-      is deployed, which is made up of the Amazon EC2 Linux instances launched for
-      this project.
-    Properties:
-      ApplicationName:
-        Ref: EBApplication
-      Description: The application to be deployed to the environment.
-      EnvironmentName:
-        Ref: EBApplication
-      OptionSettings:
-      - Namespace: aws:autoscaling:launchconfiguration
-        OptionName: InstanceType
-        Value:
-          Ref: InstanceType
-      - Namespace: aws:autoscaling:launchconfiguration
-        OptionName: EC2KeyName
-        Value: debugkp
-      - Namespace: aws:ec2:vpc
-        OptionName: VPCId
-        Value:
-          Fn::ImportValue:
-            Fn::Sub: ${GalleryId}:VPC:Id
-      - Namespace: aws:ec2:vpc
-        OptionName: Subnets
-        Value:
-          Fn::ImportValue:
-            Fn::Sub: ${GalleryId}:SubnetPubA:Id
-      TemplateName:
-        Ref: EBConfigurationTemplate
-      VersionLabel:
-        Ref: EBApplicationVersion
-    Type: AWS::ElasticBeanstalk::Environment
   EBInstanceProfile:
     Properties:
       Path: /

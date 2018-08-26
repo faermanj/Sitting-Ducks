@@ -1,7 +1,7 @@
 #/bin/bash
 set -e
 
-export COMPONENT_ID="beanstalk-flask"
+export COMPONENT_ID="beanstalk-env"
 export S3_BUCKET="sitting-ducks-codebuild"
 
 export UNIQUE=$(date '+%H%M%S')
@@ -19,7 +19,6 @@ cfn-lint -t $OUT_TEMPLATE
 
 aws cloudformation deploy \
 --stack-name "$STACK_NAME" \
---parameter-overrides "GalleryId=$GALLERY_ID,AppName=$COMPONENT_ID" \
+--parameter-overrides "GalleryId=$GALLERY_ID" "EnvName=${COMPONENT_ID}-${UNIQUE}" \
 --template-file $OUT_TEMPLATE \
 --capabilities CAPABILITY_IAM
-
