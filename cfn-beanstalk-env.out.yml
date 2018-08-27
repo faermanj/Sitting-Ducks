@@ -24,8 +24,8 @@ Resources:
         Fn::ImportValue:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
-        S3Bucket: sitting-ducks-codebuild
-        S3Key: bee755171961095f81cffc51d2f648dd
+        S3Bucket: devenv-143648-artifacts-artifactsbucket-12ylf0467tczh
+        S3Key: fbe7749fc13ace3adf2b85bbef1310f6
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:
@@ -40,9 +40,6 @@ Resources:
         OptionName: InstanceType
         Value:
           Ref: InstanceType
-      - Namespace: aws:autoscaling:launchconfiguration
-        OptionName: EC2KeyName
-        Value: debugkp
       - Namespace: aws:ec2:vpc
         OptionName: VPCId
         Value:

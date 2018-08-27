@@ -34,9 +34,9 @@ Resources:
       - Namespace: aws:autoscaling:launchconfiguration
         OptionName: InstanceType
         Value: !Ref 'InstanceType'
-      - Namespace: aws:autoscaling:launchconfiguration
-        OptionName: EC2KeyName
-        Value: debugkp
+#      - Namespace: aws:autoscaling:launchconfiguration
+#        OptionName: EC2KeyName
+#        Value: AvoidThisInProd
       - Namespace: aws:ec2:vpc
         OptionName: VPCId
         Value:
