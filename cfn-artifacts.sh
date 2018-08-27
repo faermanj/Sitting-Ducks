@@ -22,5 +22,4 @@ BUCKET_NAME=$(aws cloudformation describe-stacks \
 )
 
 echo "export GALLERY_ID=$GALLERY_ID"
-echo "export STACK_NAME=$STACK_NAME"
 echo "export BUCKET_NAME=$BUCKET_NAME"
