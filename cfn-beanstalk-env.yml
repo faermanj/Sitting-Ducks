@@ -31,6 +31,15 @@ Resources:
             !Sub "${GalleryId}:EB:ConfigurationTemplate"
       VersionLabel: !Ref 'EBApplicationVersion'
       OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: ServiceRole
+        Value: aws-elasticbeanstalk-service-role
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: LoadBalancerType
+        Value: application
       - Namespace: aws:autoscaling:launchconfiguration
         OptionName: InstanceType
         Value: !Ref 'InstanceType'
