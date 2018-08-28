@@ -1,4 +1,7 @@
 #!/bin/sh
 
-GATLING_HOME="$HOME/Dev/gatling-charts-highcharts-bundle-2.3.1"
-$GATLING_HOME/bin/gatling.sh -sf . -s sducks.LoadTesting101
+# https://www.scala-sbt.org/1.0/docs/Installing-sbt-on-Linux.html
+# curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+# sudo yum install sbt
+
+sbt gatling:tets
