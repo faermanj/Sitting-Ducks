@@ -24,7 +24,7 @@
             </elementProp>
           </collectionProp>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">awseb-awseb-w74qxe59c2b8-859322980.us-east-1.elb.amazonaws.com</stringProp>
+        <stringProp name="HTTPSampler.domain">beanstalk-env-200943.yqai5e3me5.us-east-1.elasticbeanstalk.com</stringProp>
         <stringProp name="HTTPSampler.port">80</stringProp>
         <stringProp name="HTTPSampler.protocol">http</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>

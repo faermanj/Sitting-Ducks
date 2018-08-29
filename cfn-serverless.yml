@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    sitting-ducks
+
+    Sample SAM Template for sitting-ducks
+
+Globals:
+    Function:
+        Timeout: 3
+
+
+Resources:
+    FiboIter:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: .
+            Handler: sducks.lambdas.fibo_iter
+            Runtime: python3.6
+            Events:
+                HelloWorld:
+                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    Properties:
+                        Path: /fib_iter
+                        Method: get
+
+Outputs:
+
+    HelloWorldApi:
+      Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/fib_iter/"
+
+#    HelloWorldFunction:
+#      Description: "Hello World Lambda Function ARN"
+#     Value: !GetAtt HelloWorldFunction.Arn
+#
+#    HelloWorldFunctionIamRole:
+#      Description: "Implicit IAM Role created for Hello World function"
+#      Value: !GetAtt HelloWorldFunctionRole.Arn
