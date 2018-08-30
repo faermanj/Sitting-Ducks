@@ -3,7 +3,7 @@ import json
 from flask import Flask, Response, request
 from sducks.flaskrun import flaskrun
 from sducks.fibo import fib_gen, fib_iter, fib_rec, fib_memo
-from sducks.gateway import flaskgw
+from sducks.    gateway import flaskgw
 
 application = Flask(__name__, static_url_path='/static')
 version = "2018-08-26T164315"
@@ -22,6 +22,7 @@ def get_static_text():
 
 @application.route('/fib_rec', methods=['GET'])
 def get_fib_rec():
+
     return fib_rec(gw)
 
 
@@ -37,7 +38,7 @@ def get_fib_gen():
 
 @application.route('/fib_memo', methods=['GET'])
 def get_fib_memo():
-    fib_memo(gw)
+    return fib_memo(gw)
 
 
 @application.route('/', methods=['GET'])
