@@ -6,7 +6,7 @@ import scala.concurrent.duration._
 
 
 class LoadTesting101 extends Simulation {
-  val targets = sys.env("TARGETS").getOrElse("http://localhost:5000")
+  val targets = sys.env.get("TARGETS").getOrElse("http://localhost:5000")
   val target = targets
   val httpConf = http.baseURL(target) 
   val x = 30;
