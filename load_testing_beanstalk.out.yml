@@ -1,0 +1,60 @@
+Parameters:
+  GalleryId:
+    Default: devnest
+    Type: String
+Resources:
+  BaseHAVPC:
+    Properties:
+      Parameters:
+        GalleryId:
+          Ref: GalleryId
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/4650bc7fa1d8185a1715dad9177002e7.template
+    Type: AWS::CloudFormation::Stack
+  BeanstalkApp:
+    DependsOn: BaseHAVPC
+    Properties:
+      Parameters:
+        GalleryId:
+          Ref: GalleryId
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/a1109d4377e9b76d42c3ffd432b52384.template
+    Type: AWS::CloudFormation::Stack
+  C518XLargeDucks:
+    DependsOn: BeanstalkApp
+    Properties:
+      Parameters:
+        EnvName: C518XLargeDucks
+        GalleryId:
+          Ref: GalleryId
+        InstanceType: c5.18xlarge
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+    Type: AWS::CloudFormation::Stack
+  C5LargeDucks:
+    DependsOn: BeanstalkApp
+    Properties:
+      Parameters:
+        EnvName: C5LargeDucks
+        GalleryId:
+          Ref: GalleryId
+        InstanceType: c5.large
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+    Type: AWS::CloudFormation::Stack
+  T2LargeDucks:
+    DependsOn: BeanstalkApp
+    Properties:
+      Parameters:
+        EnvName: T2LargeDucks
+        GalleryId:
+          Ref: GalleryId
+        InstanceType: t2.large
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+    Type: AWS::CloudFormation::Stack
+  T2SmallDucks:
+    DependsOn: BeanstalkApp
+    Properties:
+      Parameters:
+        EnvName: T2SmallDucks
+        GalleryId:
+          Ref: GalleryId
+        InstanceType: t2.micro
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+    Type: AWS::CloudFormation::Stack

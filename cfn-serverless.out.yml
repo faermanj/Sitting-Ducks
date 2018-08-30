@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'sitting-ducks
+
+  Sample SAM Template for sitting-ducks
+
+  '
+Globals:
+  Function:
+    MemorySize:
+      Ref: MemSize
+    Timeout:
+      Ref: TimeLimit
+Outputs:
+  APIEndpoint:
+    Description: API endpoint
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+Parameters:
+  MemSize:
+    AllowedValues:
+    - 128
+    - 512
+    - 1024
+    - 2048
+    Default: 128
+    Type: Number
+  TimeLimit:
+    Default: 10
+    Type: Number
+Resources:
+  FiboGenFn:
+    Properties:
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      Events:
+        FiboGenFnApi:
+          Properties:
+            Method: get
+            Path: /fib_gen
+          Type: Api
+      Handler: sducks.lambdas.fibo_gen
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  FiboIterFn:
+    Properties:
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      Events:
+        FiboIterApi:
+          Properties:
+            Method: get
+            Path: /fib_iter
+          Type: Api
+      Handler: sducks.lambdas.fibo_iter
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  FiboMemoFn:
+    Properties:
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      Events:
+        FiboMemoApi:
+          Properties:
+            Method: get
+            Path: /fib_memo
+          Type: Api
+      Handler: sducks.lambdas.fibo_memo
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  FiboRecFn:
+    Properties:
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      Events:
+        FiboRecApi:
+          Properties:
+            Method: get
+            Path: /fib_rec
+          Type: Api
+      Handler: sducks.lambdas.fibo_rec
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

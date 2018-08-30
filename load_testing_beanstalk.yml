@@ -1,0 +1,54 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devnest
+Resources:
+  BaseHAVPC:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ./cfn-base-ha-vpc.yml
+      Parameters:
+        GalleryId: !Ref GalleryId  
+  BeanstalkApp:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BaseHAVPC
+    Properties:
+      TemplateURL: ./cfn-beanstalk-flask.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+  T2SmallDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.out.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+        InstanceType: t2.micro
+        EnvName: T2SmallDucks
+  T2LargeDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.out.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+        InstanceType: t2.large
+        EnvName: T2LargeDucks
+  C5LargeDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.out.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+        InstanceType: c5.large
+        EnvName: C5LargeDucks
+  C518XLargeDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.out.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+        InstanceType: c5.18xlarge
+        EnvName: C518XLargeDucks

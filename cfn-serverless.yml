@@ -5,35 +5,69 @@ Description: >
 
     Sample SAM Template for sitting-ducks
 
+Parameters:
+    MemSize:
+        Type: Number
+        Default: 128
+        AllowedValues: [128, 512, 1024, 2048]
+    TimeLimit:
+        Type: Number
+        Default: 10
 Globals:
     Function:
-        Timeout: 3
-
+        Timeout: !Ref TimeLimit
+        MemorySize: !Ref MemSize
 
 Resources:
-    FiboIter:
+    FiboIterFn:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: .
+            CodeUri: ./src/main/python/
             Handler: sducks.lambdas.fibo_iter
             Runtime: python3.6
             Events:
-                HelloWorld:
-                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                FiboIterApi:
+                    Type: Api
                     Properties:
                         Path: /fib_iter
                         Method: get
-
+    FiboRecFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.fibo_rec
+            Runtime: python3.6
+            Events:
+                FiboRecApi:
+                    Type: Api
+                    Properties:
+                        Path: /fib_rec
+                        Method: get
+    FiboMemoFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.fibo_memo
+            Runtime: python3.6
+            Events:
+                FiboMemoApi:
+                    Type: Api
+                    Properties:
+                        Path: /fib_memo
+                        Method: get
+    FiboGenFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.fibo_gen
+            Runtime: python3.6
+            Events:
+                FiboGenFnApi:
+                    Type: Api
+                    Properties:
+                        Path: /fib_gen
+                        Method: get
 Outputs:
-
-    HelloWorldApi:
-      Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/fib_iter/"
-
-#    HelloWorldFunction:
-#      Description: "Hello World Lambda Function ARN"
-#     Value: !GetAtt HelloWorldFunction.Arn
-#
-#    HelloWorldFunctionIamRole:
-#      Description: "Implicit IAM Role created for Hello World function"
-#      Value: !GetAtt HelloWorldFunctionRole.Arn
+    APIEndpoint:
+      Description: "API endpoint"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
