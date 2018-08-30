@@ -6,7 +6,8 @@ import scala.concurrent.duration._
 
 
 class LoadTesting101 extends Simulation {
-  val target = "http://awseb-AWSEB-9VH4KGS2HG8E-659764353.us-east-1.elb.amazonaws.com"
+  val targets = sys.env("TARGETS").getOrElse("http://localhost:5000")
+  val target = targets
   val httpConf = http.baseURL(target) 
   val x = 30;
   val scn = scenario("LoadTesting101")
