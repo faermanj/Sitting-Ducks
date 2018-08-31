@@ -4,9 +4,10 @@ Outputs:
       Name:
         Fn::Sub: ${GalleryId}:EB:${EnvName}:EndpointURL
     Value:
-      Fn::GetAtt:
-      - EBEnvironment
-      - EndpointURL
+      Fn::Sub: http://${EBEnvironment.EndpointURL}
+  SittingDuck:
+    Value:
+      Fn::Sub: http://${EBEnvironment.EndpointURL}
 Parameters:
   EnvName:
     Default: aoienv
@@ -25,7 +26,7 @@ Resources:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
         S3Bucket: devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09
-        S3Key: 45dc8c241635fe0ec455af3859d35938
+        S3Key: d6b31bceaec57772c22d62077936c728
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:

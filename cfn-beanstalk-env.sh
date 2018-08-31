@@ -19,7 +19,7 @@ cfn-lint -t $OUT_TEMPLATE
 
 aws cloudformation deploy \
 --stack-name "$STACK_NAME" \
---parameter-overrides "GalleryId=$GALLERY_ID" "EnvName=${COMPONENT_ID}-${UNIQUE}" \
+--parameter-overrides "InstanceType=c5.18xlarge" "GalleryId=$GALLERY_ID" "EnvName=${COMPONENT_ID}-${UNIQUE}" \
 --template-file $OUT_TEMPLATE \
 --capabilities CAPABILITY_IAM
 

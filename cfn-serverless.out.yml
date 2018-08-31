@@ -6,31 +6,17 @@ Description: 'sitting-ducks
   '
 Globals:
   Function:
-    MemorySize:
-      Ref: MemSize
-    Timeout:
-      Ref: TimeLimit
+    MemorySize: 3008
+    Timeout: 10
 Outputs:
-  APIEndpoint:
-    Description: API endpoint
+  SittingDuck:
+    Description: API endpoint! Shoot!
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
-Parameters:
-  MemSize:
-    AllowedValues:
-    - 128
-    - 512
-    - 1024
-    - 2048
-    Default: 128
-    Type: Number
-  TimeLimit:
-    Default: 10
-    Type: Number
 Resources:
   FiboGenFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
       Events:
         FiboGenFnApi:
           Properties:
@@ -42,7 +28,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboIterFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
       Events:
         FiboIterApi:
           Properties:
@@ -54,7 +40,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboMemoFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
       Events:
         FiboMemoApi:
           Properties:
@@ -66,7 +52,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboRecFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/b429b28aa58c92722f43ffe99e777979
+      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
       Events:
         FiboRecApi:
           Properties:

@@ -5,18 +5,10 @@ Description: >
 
     Sample SAM Template for sitting-ducks
 
-Parameters:
-    MemSize:
-        Type: Number
-        Default: 128
-        AllowedValues: [128, 512, 1024, 2048]
-    TimeLimit:
-        Type: Number
-        Default: 10
 Globals:
     Function:
-        Timeout: !Ref TimeLimit
-        MemorySize: !Ref MemSize
+        Timeout: 10
+        MemorySize: 3008
 
 Resources:
     FiboIterFn:
@@ -68,6 +60,6 @@ Resources:
                         Path: /fib_gen
                         Method: get
 Outputs:
-    APIEndpoint:
-      Description: "API endpoint"
+    SittingDuck:
+      Description: "API endpoint! Shoot!"
       Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

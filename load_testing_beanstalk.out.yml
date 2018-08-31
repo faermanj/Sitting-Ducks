@@ -26,7 +26,7 @@ Resources:
         GalleryId:
           Ref: GalleryId
         InstanceType: c5.18xlarge
-      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/45a347ae356bcf780a03385813c9d2ed.template
     Type: AWS::CloudFormation::Stack
   C5LargeDucks:
     DependsOn: BeanstalkApp
@@ -36,7 +36,7 @@ Resources:
         GalleryId:
           Ref: GalleryId
         InstanceType: c5.large
-      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/45a347ae356bcf780a03385813c9d2ed.template
     Type: AWS::CloudFormation::Stack
   T2LargeDucks:
     DependsOn: BeanstalkApp
@@ -46,7 +46,7 @@ Resources:
         GalleryId:
           Ref: GalleryId
         InstanceType: t2.large
-      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/45a347ae356bcf780a03385813c9d2ed.template
     Type: AWS::CloudFormation::Stack
   T2SmallDucks:
     DependsOn: BeanstalkApp
@@ -56,5 +56,5 @@ Resources:
         GalleryId:
           Ref: GalleryId
         InstanceType: t2.micro
-      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/489b20cd35891187adfe82cb03db0e17.template
+      TemplateURL: https://s3.amazonaws.com/devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/45a347ae356bcf780a03385813c9d2ed.template
     Type: AWS::CloudFormation::Stack

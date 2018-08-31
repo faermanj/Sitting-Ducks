@@ -16,7 +16,7 @@ Resources:
       ApplicationName:
         Fn::ImportValue: 
           !Sub "${GalleryId}:EB:ApplicationName"
-      SourceBundle: '.'
+      SourceBundle: './src/main/python'
 
   EBEnvironment:
     Type: AWS::ElasticBeanstalk::Environment
@@ -59,8 +59,10 @@ Resources:
           - - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
             - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
 Outputs:
+  SittingDuck:
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
   EBEndpointURL:
-    Value: !GetAtt EBEnvironment.EndpointURL
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
     Export:
       Name: !Sub "${GalleryId}:EB:${EnvName}:EndpointURL"
 
