@@ -6,7 +6,7 @@ Description: 'sitting-ducks
   '
 Globals:
   Function:
-    MemorySize: 3008
+    MemorySize: 128
     Timeout: 10
 Outputs:
   SittingDuck:

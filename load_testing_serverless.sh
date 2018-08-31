@@ -6,8 +6,8 @@ export GATLING='sbt "gatling:testOnly sducks.LoadTestingSls"'
 #export RAMP="-Dusers=100 -Dramp=30"
 export RAMP="-Dusers=1200 -Dramp=600"
 
-# sls 128 https://9pcxj49gzk.execute-api.us-east-1.amazonaws.com/Prod/
-export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls128 -Dtarget=https://9pcxj49gzk.execute-api.us-east-1.amazonaws.com/Prod/"
+# sls 128 https://tnf96irvgb.execute-api.us-east-1.amazonaws.com/Prod/
+export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls128 -Dtarget=https://tnf96irvgb.execute-api.us-east-1.amazonaws.com/Prod/"
 eval $GATLING
 # sls 512 https://5crfw7gib9.execute-api.us-east-1.amazonaws.com/Prod/
 export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls512 -Dtarget=https://5crfw7gib9.execute-api.us-east-1.amazonaws.com/Prod/"
