@@ -13,7 +13,7 @@ eval $GATLING
 export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls512 -Dtarget=https://5crfw7gib9.execute-api.us-east-1.amazonaws.com/Prod/"
 eval $GATLING
 # sls 3008 https://r8lh32x5s1.execute-api.us-east-1.amazonaws.com/Prod/
-export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls512 -Dtarget=https://r8lh32x5s1.execute-api.us-east-1.amazonaws.com/Prod/"
+export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=sls3008 -Dtarget=https://r8lh32x5s1.execute-api.us-east-1.amazonaws.com/Prod/"
 eval $GATLING
 # eb t2.micro http://awseb-AWSEB-9TF6IXMP75ST-704396520.us-east-1.elb.amazonaws.com/
 export JAVA_OPTS="$RAMP -Dgatling.core.runDescription=ebt2micro -Dtarget=http://awseb-AWSEB-9TF6IXMP75ST-704396520.us-east-1.elb.amazonaws.com/"
