@@ -1,0 +1,874 @@
+<classpath>
+  <classpathentry kind="src" path="src/test/scala"/>
+  <classpathentry kind="src" path="src/test/resources"/>
+  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"></classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling.highcharts/gatling-charts-highcharts/srcs/gatling-charts-highcharts-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling.highcharts/gatling-charts-highcharts/jars/gatling-charts-highcharts-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling.highcharts/gatling-charts-highcharts/docs/gatling-charts-highcharts-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-charts/srcs/gatling-charts-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-charts/jars/gatling-charts-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-charts/docs/gatling-charts-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-core/srcs/gatling-core-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-core/jars/gatling-core-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-core/docs/gatling-core-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-commons/srcs/gatling-commons-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-commons/jars/gatling-commons-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-commons/docs/gatling-commons-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe/config/srcs/config-1.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe/config/bundles/config-1.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe/config/docs/config-1.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.dongxiguo/fastring_2.12/srcs/fastring_2.12-0.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.dongxiguo/fastring_2.12/jars/fastring_2.12-0.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.dongxiguo/fastring_2.12/docs/fastring_2.12-0.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.suzaku/boopickle_2.12/srcs/boopickle_2.12-1.2.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.suzaku/boopickle_2.12/jars/boopickle_2.12-1.2.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.suzaku/boopickle_2.12/docs/boopickle_2.12-1.2.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.softwaremill.quicklens/quicklens_2.12/srcs/quicklens_2.12-1.4.8-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.softwaremill.quicklens/quicklens_2.12/jars/quicklens_2.12-1.4.8.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.softwaremill.quicklens/quicklens_2.12/docs/quicklens_2.12-1.4.8-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.12/srcs/scala-java8-compat_2.12-0.8.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.12/bundles/scala-java8-compat_2.12-0.8.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.12/docs/scala-java8-compat_2.12-0.8.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client-netty-utils/srcs/async-http-client-netty-utils-2.0.39-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client-netty-utils/jars/async-http-client-netty-utils-2.0.39.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client-netty-utils/docs/async-http-client-netty-utils-2.0.39-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.slf4j/slf4j-api/srcs/slf4j-api-1.7.25-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.25.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.slf4j/slf4j-api/docs/slf4j-api-1.7.25-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/srcs/scala-logging_2.12-3.7.2-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/bundles/scala-logging_2.12-3.7.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe.scala-logging/scala-logging_2.12/docs/scala-logging_2.12-3.7.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-classic/srcs/logback-classic-1.2.3-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.2.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-classic/docs/logback-classic-1.2.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-core/srcs/logback-core-1.2.3-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.2.3.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/ch.qos.logback/logback-core/docs/logback-core-1.2.3-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/srcs/akka-actor_2.12-2.5.4-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/jars/akka-actor_2.12-2.5.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/docs/akka-actor_2.12-2.5.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.12/srcs/akka-slf4j_2.12-2.5.4-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.12/jars/akka-slf4j_2.12-2.5.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.12/docs/akka-slf4j_2.12-2.5.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/srcs/jackson-dataformat-csv-2.9.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/bundles/jackson-dataformat-csv-2.9.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-csv/docs/jackson-dataformat-csv-2.9.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.github.ben-manes.caffeine/caffeine/srcs/caffeine-2.5.5-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.github.ben-manes.caffeine/caffeine/jars/caffeine-2.5.5.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.github.ben-manes.caffeine/caffeine/docs/caffeine-2.5.5-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/srcs/scala-parser-combinators_2.12-1.0.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/bundles/scala-parser-combinators_2.12-1.0.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.12/docs/scala-parser-combinators_2.12-1.0.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.github.scopt/scopt_2.12/srcs/scopt_2.12-3.7.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.github.scopt/scopt_2.12/jars/scopt_2.12-3.7.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.github.scopt/scopt_2.12/docs/scopt_2.12-3.7.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.google.code.findbugs/jsr305/srcs/jsr305-3.0.2-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.google.code.findbugs/jsr305/jars/jsr305-3.0.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.google.code.findbugs/jsr305/docs/jsr305-3.0.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/jsonpath_2.12/srcs/jsonpath_2.12-0.6.9-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/jsonpath_2.12/jars/jsonpath_2.12-0.6.9.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/jsonpath_2.12/docs/jsonpath_2.12-0.6.9-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-json/srcs/boon-json-0.6.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-json/jars/boon-json-0.6.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-json/docs/boon-json-0.6.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-reflekt/srcs/boon-reflekt-0.6.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-reflekt/jars/boon-reflekt-0.6.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.advantageous.boon/boon-reflekt/docs/boon-reflekt-0.6.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/net.sf.saxon/Saxon-HE/srcs/Saxon-HE-9.8.0-4-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/net.sf.saxon/Saxon-HE/jars/Saxon-HE-9.8.0-4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/net.sf.saxon/Saxon-HE/docs/Saxon-HE-9.8.0-4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.jodd/jodd-lagarto/srcs/jodd-lagarto-3.8.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.jodd/jodd-lagarto/jars/jodd-lagarto-3.8.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.jodd/jodd-lagarto/docs/jodd-lagarto-3.8.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.jodd/jodd-core/srcs/jodd-core-3.8.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.jodd/jodd-core/jars/jodd-core-3.8.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.jodd/jodd-core/docs/jodd-core-3.8.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.jodd/jodd-log/srcs/jodd-log-3.8.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.jodd/jodd-log/jars/jodd-log-3.8.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.jodd/jodd-log/docs/jodd-log-3.8.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.tdunning/t-digest/srcs/t-digest-3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.tdunning/t-digest/jars/t-digest-3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.tdunning/t-digest/docs/t-digest-3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-app/srcs/gatling-app-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-app/jars/gatling-app-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-app/docs/gatling-app-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-http/srcs/gatling-http-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-http/jars/gatling-http-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-http/docs/gatling-http-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client/srcs/async-http-client-2.0.39-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client/jars/async-http-client-2.0.39.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.asynchttpclient/async-http-client/docs/async-http-client-2.0.39-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver-dns/srcs/netty-resolver-dns-2.0.39-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver-dns/jars/netty-resolver-dns-2.0.39.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver-dns/docs/netty-resolver-dns-2.0.39-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver/srcs/netty-resolver-2.0.39-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver/jars/netty-resolver-2.0.39.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-resolver/docs/netty-resolver-2.0.39-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-codec-dns/srcs/netty-codec-dns-2.0.39-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-codec-dns/jars/netty-codec-dns-2.0.39.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.asynchttpclient/netty-codec-dns/docs/netty-codec-dns-2.0.39-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/srcs/scala-xml_2.12-1.0.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/docs/scala-xml_2.12-1.0.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-jms/srcs/gatling-jms-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-jms/jars/gatling-jms-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-jms/docs/gatling-jms-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/srcs/geronimo-jms_1.1_spec-1.1.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/jars/geronimo-jms_1.1_spec-1.1.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.apache.geronimo.specs/geronimo-jms_1.1_spec/docs/geronimo-jms_1.1_spec-1.1.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-jdbc/srcs/gatling-jdbc-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-jdbc/jars/gatling-jdbc-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-jdbc/docs/gatling-jdbc-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-redis/srcs/gatling-redis-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-redis/jars/gatling-redis-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-redis/docs/gatling-redis-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/net.debasishg/redisclient_2.12/srcs/redisclient_2.12-3.4-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/net.debasishg/redisclient_2.12/jars/redisclient_2.12-3.4.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/net.debasishg/redisclient_2.12/docs/redisclient_2.12-3.4-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/commons-pool/commons-pool/srcs/commons-pool-1.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/commons-pool/commons-pool/jars/commons-pool-1.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/commons-pool/commons-pool/docs/commons-pool-1.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-metrics/srcs/gatling-metrics-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-metrics/jars/gatling-metrics-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-metrics/docs/gatling-metrics-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.hdrhistogram/HdrHistogram/srcs/HdrHistogram-2.1.9-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.hdrhistogram/HdrHistogram/bundles/HdrHistogram-2.1.9.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.hdrhistogram/HdrHistogram/docs/HdrHistogram-2.1.9-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-recorder/srcs/gatling-recorder-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-recorder/jars/gatling-recorder-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-recorder/docs/gatling-recorder-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-swing_2.12/srcs/scala-swing_2.12-2.0.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-swing_2.12/bundles/scala-swing_2.12-2.0.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.scala-lang.modules/scala-swing_2.12/docs/scala-swing_2.12-2.0.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.bouncycastle/bcpkix-jdk15on/srcs/bcpkix-jdk15on-1.58-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.bouncycastle/bcpkix-jdk15on/jars/bcpkix-jdk15on-1.58.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.bouncycastle/bcpkix-jdk15on/docs/bcpkix-jdk15on-1.58-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.bouncycastle/bcprov-jdk15on/srcs/bcprov-jdk15on-1.58-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.bouncycastle/bcprov-jdk15on/jars/bcprov-jdk15on-1.58.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.bouncycastle/bcprov-jdk15on/docs/bcprov-jdk15on-1.58-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.gatling/gatling-test-framework/srcs/gatling-test-framework-2.3.1-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.gatling/gatling-test-framework/jars/gatling-test-framework-2.3.1.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.gatling/gatling-test-framework/docs/gatling-test-framework-2.3.1-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.scala-sbt/test-interface/srcs/test-interface-1.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.scala-sbt/test-interface/jars/test-interface-1.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.scala-sbt/test-interface/docs/test-interface-1.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/aws-sdk-java/jars/aws-sdk-java-2.0.0-preview-11.jar"/>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/pinpoint/srcs/pinpoint-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/pinpoint/jars/pinpoint-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/pinpoint/docs/pinpoint-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sdk-core/srcs/sdk-core-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sdk-core/jars/sdk-core-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sdk-core/docs/sdk-core-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/annotations/srcs/annotations-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/annotations/jars/annotations-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/annotations/docs/annotations-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/http-client-spi/srcs/http-client-spi-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/http-client-spi/jars/http-client-spi-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/http-client-spi/docs/http-client-spi-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/utils/srcs/utils-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/utils/jars/utils-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/utils/docs/utils-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.reactivestreams/reactive-streams/srcs/reactive-streams-1.0.2-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.reactivestreams/reactive-streams/docs/reactive-streams-1.0.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.ion/ion-java/srcs/ion-java-1.2.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.ion/ion-java/bundles/ion-java-1.2.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.ion/ion-java/docs/ion-java-1.2.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/srcs/jackson-core-2.9.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/docs/jackson-core-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/srcs/jackson-databind-2.9.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/docs/jackson-databind-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/srcs/jackson-dataformat-cbor-2.9.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/bundles/jackson-dataformat-cbor-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor/docs/jackson-dataformat-cbor-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/auth/srcs/auth-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/auth/jars/auth-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/auth/docs/auth-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/regions/srcs/regions-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/regions/jars/regions-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/regions/docs/regions-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/profiles/srcs/profiles-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/profiles/jars/profiles-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/profiles/docs/profiles-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/srcs/jackson-annotations-2.9.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/docs/jackson-annotations-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.jr/jackson-jr-objects/srcs/jackson-jr-objects-2.9.6-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.jr/jackson-jr-objects/bundles/jackson-jr-objects-2.9.6.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.fasterxml.jackson.jr/jackson-jr-objects/docs/jackson-jr-objects-2.9.6-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/aws-core/srcs/aws-core-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/aws-core/jars/aws-core-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/aws-core/docs/aws-core-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/xray/srcs/xray-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/xray/jars/xray-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/xray/docs/xray-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworkscm/srcs/opsworkscm-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworkscm/jars/opsworkscm-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworkscm/docs/opsworkscm-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/support/srcs/support-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/support/jars/support-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/support/docs/support-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpledb/srcs/simpledb-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpledb/jars/simpledb-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpledb/docs/simpledb-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servicecatalog/srcs/servicecatalog-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servicecatalog/jars/servicecatalog-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servicecatalog/docs/servicecatalog-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servermigration/srcs/servermigration-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servermigration/jars/servermigration-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/servermigration/docs/servermigration-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpleworkflow/srcs/simpleworkflow-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpleworkflow/jars/simpleworkflow-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/simpleworkflow/docs/simpleworkflow-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/storagegateway/srcs/storagegateway-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/storagegateway/jars/storagegateway-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/storagegateway/docs/storagegateway-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/route53/srcs/route53-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/route53/jars/route53-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/route53/docs/route53-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/s3/srcs/s3-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/s3/jars/s3-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/s3/docs/s3-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/importexport/srcs/importexport-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/importexport/jars/importexport-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/importexport/docs/importexport-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sts/srcs/sts-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sts/jars/sts-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sts/docs/sts-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sqs/srcs/sqs-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sqs/jars/sqs-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sqs/docs/sqs-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rds/srcs/rds-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rds/jars/rds-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rds/docs/rds-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/redshift/srcs/redshift-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/redshift/jars/redshift-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/redshift/docs/redshift-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticbeanstalk/srcs/elasticbeanstalk-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticbeanstalk/jars/elasticbeanstalk-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticbeanstalk/docs/elasticbeanstalk-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iam/srcs/iam-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iam/jars/iam-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iam/docs/iam-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/datapipeline/srcs/datapipeline-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/datapipeline/jars/datapipeline-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/datapipeline/docs/datapipeline-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancing/srcs/elasticloadbalancing-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancing/jars/elasticloadbalancing-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancing/docs/elasticloadbalancing-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancingv2/srcs/elasticloadbalancingv2-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancingv2/jars/elasticloadbalancingv2-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticloadbalancingv2/docs/elasticloadbalancingv2-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/emr/srcs/emr-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/emr/jars/emr-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/emr/docs/emr-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticache/srcs/elasticache-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticache/jars/elasticache-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticache/docs/elasticache-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elastictranscoder/srcs/elastictranscoder-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elastictranscoder/jars/elastictranscoder-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elastictranscoder/docs/elastictranscoder-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sns/srcs/sns-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sns/jars/sns-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/sns/docs/sns-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/budgets/srcs/budgets-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/budgets/jars/budgets-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/budgets/docs/budgets-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudtrail/srcs/cloudtrail-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudtrail/jars/cloudtrail-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudtrail/docs/cloudtrail-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudwatch/srcs/cloudwatch-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudwatch/jars/cloudwatch-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudwatch/docs/cloudwatch-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/logs/srcs/logs-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/logs/jars/logs-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/logs/docs/logs-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/events/srcs/events-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/events/jars/events-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/events/docs/events-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidentity/srcs/cognitoidentity-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidentity/jars/cognitoidentity-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidentity/docs/cognitoidentity-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitosync/srcs/cognitosync-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitosync/jars/cognitosync-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitosync/docs/cognitosync-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directconnect/srcs/directconnect-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directconnect/jars/directconnect-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directconnect/docs/directconnect-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudformation/srcs/cloudformation-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudformation/jars/cloudformation-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudformation/docs/cloudformation-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudfront/srcs/cloudfront-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudfront/jars/cloudfront-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudfront/docs/cloudfront-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/clouddirectory/srcs/clouddirectory-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/clouddirectory/jars/clouddirectory-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/clouddirectory/docs/clouddirectory-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kinesis/srcs/kinesis-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kinesis/jars/kinesis-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kinesis/docs/kinesis-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworks/srcs/opsworks-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworks/jars/opsworks-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/opsworks/docs/opsworks-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ses/srcs/ses-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ses/jars/ses-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ses/docs/ses-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/autoscaling/srcs/autoscaling-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/autoscaling/jars/autoscaling-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/autoscaling/docs/autoscaling-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/commons-codec/commons-codec/srcs/commons-codec-1.10-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.10.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/commons-codec/commons-codec/docs/commons-codec-1.10-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudsearch/srcs/cloudsearch-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudsearch/jars/cloudsearch-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudsearch/docs/cloudsearch-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codedeploy/srcs/codedeploy-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codedeploy/jars/codedeploy-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codedeploy/docs/codedeploy-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codepipeline/srcs/codepipeline-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codepipeline/jars/codepipeline-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codepipeline/docs/codepipeline-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kms/srcs/kms-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kms/jars/kms-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/kms/docs/kms-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/config/srcs/config-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/config/jars/config-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/config/docs/config-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lambda/srcs/lambda-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lambda/jars/lambda-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lambda/docs/lambda-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecs/srcs/ecs-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecs/jars/ecs-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecs/docs/ecs-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecr/srcs/ecr-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecr/jars/ecr-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ecr/docs/ecr-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudhsm/srcs/cloudhsm-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudhsm/jars/cloudhsm-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cloudhsm/docs/cloudhsm-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ssm/srcs/ssm-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ssm/jars/ssm-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ssm/docs/ssm-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workspaces/srcs/workspaces-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workspaces/jars/workspaces-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workspaces/docs/workspaces-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/machinelearning/srcs/machinelearning-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/machinelearning/jars/machinelearning-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/machinelearning/docs/machinelearning-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directory/srcs/directory-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directory/jars/directory-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/directory/docs/directory-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/efs/srcs/efs-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/efs/jars/efs-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/efs/docs/efs-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codecommit/srcs/codecommit-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codecommit/jars/codecommit-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codecommit/docs/codecommit-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/devicefarm/srcs/devicefarm-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/devicefarm/jars/devicefarm-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/devicefarm/docs/devicefarm-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticsearch/srcs/elasticsearch-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticsearch/jars/elasticsearch-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/elasticsearch/docs/elasticsearch-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacecommerceanalytics/srcs/marketplacecommerceanalytics-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacecommerceanalytics/jars/marketplacecommerceanalytics-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacecommerceanalytics/docs/marketplacecommerceanalytics-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/inspector/srcs/inspector-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/inspector/jars/inspector-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/inspector/docs/inspector-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iot/srcs/iot-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iot/jars/iot-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/iot/docs/iot-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/api-gateway/srcs/api-gateway-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/api-gateway/jars/api-gateway-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/api-gateway/docs/api-gateway-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/acm/srcs/acm-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/acm/jars/acm-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/acm/docs/acm-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/gamelift/srcs/gamelift-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/gamelift/jars/gamelift-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/gamelift/docs/gamelift-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dms/srcs/dms-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dms/jars/dms-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dms/docs/dms-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacemeteringservice/srcs/marketplacemeteringservice-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacemeteringservice/jars/marketplacemeteringservice-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplacemeteringservice/docs/marketplacemeteringservice-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidp/srcs/cognitoidp-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidp/jars/cognitoidp-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/cognitoidp/docs/cognitoidp-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/discovery/srcs/discovery-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/discovery/jars/discovery-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/discovery/docs/discovery-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/applicationautoscaling/srcs/applicationautoscaling-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/applicationautoscaling/jars/applicationautoscaling-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/applicationautoscaling/docs/applicationautoscaling-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/snowball/srcs/snowball-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/snowball/jars/snowball-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/snowball/docs/snowball-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rekognition/srcs/rekognition-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rekognition/jars/rekognition-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/rekognition/docs/rekognition-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/polly/srcs/polly-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/polly/jars/polly-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/polly/docs/polly-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lightsail/srcs/lightsail-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lightsail/jars/lightsail-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lightsail/docs/lightsail-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/stepfunctions/srcs/stepfunctions-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/stepfunctions/jars/stepfunctions-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/stepfunctions/docs/stepfunctions-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.jayway.jsonpath/json-path/srcs/json-path-2.4.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.jayway.jsonpath/json-path/jars/json-path-2.4.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.jayway.jsonpath/json-path/docs/json-path-2.4.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/health/srcs/health-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/health/jars/health-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/health/docs/health-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/costandusagereport/srcs/costandusagereport-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/costandusagereport/jars/costandusagereport-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/costandusagereport/docs/costandusagereport-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codebuild/srcs/codebuild-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codebuild/jars/codebuild-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codebuild/docs/codebuild-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appstream/srcs/appstream-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appstream/jars/appstream-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appstream/docs/appstream-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/shield/srcs/shield-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/shield/jars/shield-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/shield/docs/shield-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/batch/srcs/batch-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/batch/jars/batch-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/batch/docs/batch-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dynamodb/srcs/dynamodb-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dynamodb/jars/dynamodb-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dynamodb/docs/dynamodb-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/athena/srcs/athena-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/athena/jars/athena-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/athena/docs/athena-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codestar/srcs/codestar-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codestar/jars/codestar-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/codestar/docs/codestar-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dax/srcs/dax-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dax/jars/dax-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/dax/docs/dax-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ec2/srcs/ec2-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ec2/jars/ec2-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/ec2/docs/ec2-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/glacier/srcs/glacier-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/glacier/jars/glacier-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/glacier/docs/glacier-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/greengrass/srcs/greengrass-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/greengrass/jars/greengrass-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/greengrass/docs/greengrass-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lexmodelbuilding/srcs/lexmodelbuilding-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lexmodelbuilding/jars/lexmodelbuilding-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/lexmodelbuilding/docs/lexmodelbuilding-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplaceentitlement/srcs/marketplaceentitlement-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplaceentitlement/jars/marketplaceentitlement-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/marketplaceentitlement/docs/marketplaceentitlement-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/mechanicalturkrequester/srcs/mechanicalturkrequester-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/mechanicalturkrequester/jars/mechanicalturkrequester-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/mechanicalturkrequester/docs/mechanicalturkrequester-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workdocs/srcs/workdocs-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workdocs/jars/workdocs-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/workdocs/docs/workdocs-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appsync/srcs/appsync-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appsync/jars/appsync-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/appsync/docs/appsync-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/apache-client/srcs/apache-client-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/apache-client/jars/apache-client-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/apache-client/docs/apache-client-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpclient/srcs/httpclient-4.5.5-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.5.5.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpclient/docs/httpclient-4.5.5-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpcore/srcs/httpcore-4.4.10-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.4.10.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/org.apache.httpcomponents/httpcore/docs/httpcore-4.4.10-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/commons-logging/commons-logging/srcs/commons-logging-1.2-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/commons-logging/commons-logging/docs/commons-logging-1.2-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/netty-nio-client/srcs/netty-nio-client-2.0.0-preview-11-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/software.amazon.awssdk/netty-nio-client/jars/netty-nio-client-2.0.0-preview-11.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/software.amazon.awssdk/netty-nio-client/docs/netty-nio-client-2.0.0-preview-11-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-codec-http/srcs/netty-codec-http-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-codec-http/jars/netty-codec-http-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-codec-http/docs/netty-codec-http-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-codec/srcs/netty-codec-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-codec/jars/netty-codec-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-codec/docs/netty-codec-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-transport/srcs/netty-transport-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-transport/jars/netty-transport-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-transport/docs/netty-transport-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-buffer/srcs/netty-buffer-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-buffer/jars/netty-buffer-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-buffer/docs/netty-buffer-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-common/srcs/netty-common-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-common/jars/netty-common-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-common/docs/netty-common-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-resolver/srcs/netty-resolver-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-resolver/jars/netty-resolver-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-resolver/docs/netty-resolver-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-handler/srcs/netty-handler-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-handler/jars/netty-handler-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-handler/docs/netty-handler-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-transport-native-epoll/jars/netty-transport-native-epoll-4.1.26.Final-linux-x86_64.jar"/>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/io.netty/netty-transport-native-unix-common/srcs/netty-transport-native-unix-common-4.1.26.Final-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/io.netty/netty-transport-native-unix-common/jars/netty-transport-native-unix-common-4.1.26.Final.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/io.netty/netty-transport-native-unix-common/docs/netty-transport-native-unix-common-4.1.26.Final-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams-http/srcs/netty-reactive-streams-http-2.0.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams-http/jars/netty-reactive-streams-http-2.0.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams-http/docs/netty-reactive-streams-http-2.0.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry sourcepath="/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams/srcs/netty-reactive-streams-2.0.0-sources.jar" kind="lib" path="/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams/jars/netty-reactive-streams-2.0.0.jar">
+    <attributes>
+      <attribute name="javadoc_location" value="jar:file:/Users/faermanj/.ivy2/cache/com.typesafe.netty/netty-reactive-streams/docs/netty-reactive-streams-2.0.0-javadoc.jar!/"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,4 +1,9 @@
 #!/bin/sh
 
-GATLING_HOME="$HOME/Dev/gatling-charts-highcharts-bundle-2.3.1"
-$GATLING_HOME/bin/gatling.sh -sf . -s sducks.LoadTesting101
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
+
+# https://www.scala-sbt.org/1.0/docs/Installing-sbt-on-Linux.html
+# curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+# sudo yum install java-1.8.0-openjdk-devel sbt
+
+sbt gatling:test
