@@ -23,3 +23,11 @@ Resources:
       TemplateURL: ./cfn-beanstalk-env.out.yml
       Parameters:
         GalleryId: !Ref GalleryId
+  LargeDucks:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: BeanstalkApp
+    Properties:
+      TemplateURL: ./cfn-beanstalk-env.out.yml
+      Parameters:
+        GalleryId: !Ref GalleryId
+        InstanceType: t2.large        

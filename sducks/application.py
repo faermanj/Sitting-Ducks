@@ -16,7 +16,6 @@ def get_version():
 def get_static_text():
     return Response("hello world!", mimetype='text/plain', status=200)
 
-
 def fib_iter(n):
     a, b = 1, 1
     for i in range(n-1):

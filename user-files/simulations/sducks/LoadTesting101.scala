@@ -6,7 +6,7 @@ import scala.concurrent.duration._
 
 
 class LoadTesting101 extends Simulation {
-  val httpConf = http.baseURL("http://localhost:5000") 
+  val httpConf = http.baseURL("http://awseb-e-c-awsebloa-a0m4ut5hal1f-873541928.us-east-1.elb.amazonaws.com") 
   val x = 30;
   val scn = scenario("LoadTesting101")
     .exec(http("static_1mb").get("/static/1mb.txt"))
@@ -16,6 +16,6 @@ class LoadTesting101 extends Simulation {
     .exec(http("fib_memo").get(s"/fib_memo?x=$x"))
 
   setUp(
-    scn.inject(rampUsers(120) over (300 seconds))
+    scn.inject(rampUsers(12) over (30 seconds))
   ).protocols(httpConf)
 }

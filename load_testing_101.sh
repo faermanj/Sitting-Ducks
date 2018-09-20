@@ -1,12 +1,12 @@
 #/bin/bash
 set -e
 
-export COMPONENT_ID="lt-101"
+export COMPONENT_ID="lt101"
 export S3_BUCKET="sitting-ducks-codebuild"
 
 export UNIQUE=$(date '+%H%M%S')
-export GALLERY_ID="${GALLERY_ID:-devenv-$UNIQUE}"
-export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$COMPONENT_ID}"
+export GALLERY_ID="devenv-$UNIQUE"
+export STACK_NAME="$GALLERY_ID_$COMPONENT_ID"
 export SRC_TEMPLATE="load_testing_101.yml"
 export OUT_TEMPLATE="load_testing_101.out.yml"
 

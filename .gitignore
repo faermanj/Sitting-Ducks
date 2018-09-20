@@ -146,3 +146,5 @@ pip-selfcheck.json
 
 
 # End of https://www.gitignore.io/api/linux,python,jupyternotebook
+cfn-base-ha-vpc.json
+user-files/.DS_Store
