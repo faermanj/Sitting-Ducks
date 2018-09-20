@@ -152,3 +152,6 @@ cfn-base-ha-vpc.json
 cfn-beanstalk-env.out.yml
 load_testing_101.out.yml
 .DS_Store
+load_testing_101.out.yml
+cfn-beanstalk-env.out.yml
+cfn-base-ha-vpc.json

@@ -24,8 +24,8 @@ Resources:
         Fn::ImportValue:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
-        S3Bucket: devenv-143648-artifacts-artifactsbucket-12ylf0467tczh
-        S3Key: fbe7749fc13ace3adf2b85bbef1310f6
+        S3Bucket: sitting-ducks-codebuild
+        S3Key: 9c09519528345c63df19f22101e2533f
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:
