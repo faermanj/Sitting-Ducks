@@ -148,3 +148,7 @@ pip-selfcheck.json
 # End of https://www.gitignore.io/api/linux,python,jupyternotebook
 cfn-base-ha-vpc.json
 user-files/.DS_Store
+cfn-base-ha-vpc.json
+cfn-beanstalk-env.out.yml
+load_testing_101.out.yml
+.DS_Store
