@@ -31,3 +31,5 @@ export UNIQUE=$(date '+%H%M%S')
 aws s3 sync ./target/gatling s3://$BUCKET_NAME/gatling/$UNIQUE/
 
 echo "DONE"
+# export JAVA_OPTS="-Dusers=2400 -Dramp=600 -Dgatling.core.runDescription=fargate -Dtarget=http://deven-ECSAL-18EEIDGZ7VEMG-1957082730.us-east-1.elb.amazonaws.com"
+

@@ -7,44 +7,6 @@ Parameters:
     Type: AWS::EC2::KeyPair::KeyName
     Description: Name of an existing EC2 KeyPair to enable SSH access to the ECS instances.
     Default: debugkp
-  DesiredCapacity:
-    Type: Number
-    Default: '1'
-    Description: Number of instances to launch in your ECS cluster.
-  MaxSize:
-    Type: Number
-    Default: '10'
-    Description: Maximum number of instances that can be launched in your ECS cluster.
-  InstanceType:
-    Description: EC2 instance type
-    Type: String
-    Default: t2.small
-    AllowedValues: [t2.micro, t2.small, t2.medium, t2.large, m3.medium, m3.large,
-      m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge,
-      c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c3.large, c3.xlarge,
-      c3.2xlarge, c3.4xlarge, c3.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge,
-      r3.8xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge]
-    ConstraintDescription: Please choose a valid instance type.
-Mappings:
-  AWSRegionToAMI:
-    us-east-1:
-      AMIID: ami-eca289fb
-    us-east-2:
-      AMIID: ami-446f3521
-    us-west-1:
-      AMIID: ami-9fadf8ff
-    us-west-2:
-      AMIID: ami-7abc111a
-    eu-west-1:
-      AMIID: ami-a1491ad2
-    eu-central-1:
-      AMIID: ami-54f5303b
-    ap-northeast-1:
-      AMIID: ami-9cd57ffd
-    ap-southeast-1:
-      AMIID: ami-a900a3ca
-    ap-southeast-2:
-      AMIID: ami-5781be34
 Resources:
   ECSCluster:
     Type: AWS::ECS::Cluster
@@ -70,7 +32,7 @@ Resources:
       IpProtocol: tcp
       FromPort: '5000'
       ToPort: '5000'
-      CidrIp: 0.0.0.0/0      
+      CidrIp: 0.0.0.0/0 
   EcsSecurityGroupSSHinbound:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
@@ -95,19 +57,23 @@ Resources:
   taskdefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: !Join ['', [!Ref 'AWS::StackName', -ecs-demo-app]]
+      Family: !Join ['', [!Ref 'AWS::StackName', -sducks-family]]
+      RequiresCompatibilities:
+        - "EC2"
+        - "FARGATE"
+      NetworkMode: awsvpc
+      Cpu: '1024'
+      Memory: '2048'
       ContainerDefinitions:
       - Name: sducks
-        Cpu: '1024'
         Essential: 'true'
         Image: jfaerman/sducks
-        Memory: '256'
-        LogConfiguration:
-          LogDriver: awslogs
-          Options:
-            awslogs-group: !Ref 'CloudwatchLogsGroup'
-            awslogs-region: !Ref 'AWS::Region'
-            awslogs-stream-prefix: sducks-logs
+#        LogConfiguration:
+#          LogDriver: awslogs
+#          Options:
+#            awslogs-group: !Ref 'CloudwatchLogsGroup'
+#            awslogs-region: !Ref 'AWS::Region'
+#            awslogs-stream-prefix: sducks-logs
 #        MountPoints:
 #        - ContainerPath: /usr/local/apache2/htdocs
 #          SourceVolume: my-vol
@@ -126,7 +92,6 @@ Resources:
       SecurityGroups: [!Ref 'EcsSecurityGroup']
   ALBListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
-    DependsOn: ECSServiceRole
     Properties:
       DefaultActions:
       - Type: forward
@@ -150,6 +115,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     DependsOn: ECSALB
     Properties:
+      TargetType: ip
       HealthCheckIntervalSeconds: 10
       HealthCheckPath: /
       HealthCheckProtocol: HTTP
@@ -161,36 +127,6 @@ Resources:
       VpcId:
         Fn::ImportValue: 
             !Sub "${GalleryId}:VPC:Id"
-  ECSAutoScalingGroup:
-    Type: AWS::AutoScaling::AutoScalingGroup
-    Properties:
-      VPCZoneIdentifier:
-        - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
-        - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
-      LaunchConfigurationName: !Ref 'ContainerInstances'
-      MinSize: '1'
-      MaxSize: !Ref 'MaxSize'
-      DesiredCapacity: !Ref 'DesiredCapacity'
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: PT15M
-    UpdatePolicy:
-      AutoScalingReplacingUpdate:
-        WillReplace: 'true'
-  ContainerInstances:
-    Type: AWS::AutoScaling::LaunchConfiguration
-    Properties:
-      ImageId: !FindInMap [AWSRegionToAMI, !Ref 'AWS::Region', AMIID]
-      SecurityGroups: [!Ref 'EcsSecurityGroup']
-      InstanceType: !Ref 'InstanceType'
-      IamInstanceProfile: !Ref 'EC2InstanceProfile'
-      KeyName: !Ref 'KeyName'
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash -xe
-          echo ECS_CLUSTER=${ECSCluster} >> /etc/ecs/ecs.config
-          yum install -y aws-cfn-bootstrap
-          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource ECSAutoScalingGroup --region ${AWS::Region}
   service:
     Type: AWS::ECS::Service
     DependsOn: ALBListener
@@ -201,37 +137,39 @@ Resources:
       - ContainerName: sducks
         ContainerPort: '5000'
         TargetGroupArn: !Ref 'ECSTG'
-      Role: !Ref 'ECSServiceRole'
       TaskDefinition: !Ref 'taskdefinition'
-  ECSServiceRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-        - Effect: Allow
-          Principal:
-            Service: [ecs.amazonaws.com]
-          Action: ['sts:AssumeRole']
-      Path: /
-      Policies:
-      - PolicyName: ecs-service
-        PolicyDocument:
-          Statement:
-          - Effect: Allow
-            Action: ['elasticloadbalancing:DeregisterInstancesFromLoadBalancer', 'elasticloadbalancing:DeregisterTargets',
-              'elasticloadbalancing:Describe*', 'elasticloadbalancing:RegisterInstancesWithLoadBalancer',
-              'elasticloadbalancing:RegisterTargets', 'ec2:Describe*', 'ec2:AuthorizeSecurityGroupIngress']
-            Resource: '*'
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - !Ref EcsSecurityGroup
+          Subnets:
+            - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
+            - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
   ServiceScalingTarget:
     Type: AWS::ApplicationAutoScaling::ScalableTarget
     DependsOn: service
     Properties:
-      MaxCapacity: 2
+      MaxCapacity: 10
       MinCapacity: 1
       ResourceId: !Join ['', [service/, !Ref 'ECSCluster', /, !GetAtt [service, Name]]]
       RoleARN: !GetAtt [AutoscalingRole, Arn]
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
+  CPUTrackingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: CPUTrackingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref 'ServiceScalingTarget'
+      TargetTrackingScalingPolicyConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageCPUUtilization
+        DisableScaleIn: false
+        ScaleInCooldown: 120
+        ScaleOutCooldown: 120
+        TargetValue: 70
   ServiceScalingPolicy:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:
