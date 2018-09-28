@@ -3,6 +3,9 @@ Parameters:
   GalleryId:
     Type: String
     Default: devtest
+  DBInstanceClass:
+    Type: String
+    Default: db.r3.large    
 Resources:
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -32,3 +35,17 @@ Resources:
         DBSubnetGroupName: !Ref DBSubnetGroup
         VpcSecurityGroupIds:
           - !Ref DBSecurityGroup
+  DBPrimary:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: aurora
+      DBClusterIdentifier: !Ref "DBCluster"
+      DBInstanceClass: !Ref "DBInstanceClass"
+      DBSubnetGroupName: !Ref "DBSubnetGroup"
+      PubliclyAccessible: true
+Outputs:
+  EndpointAddress:
+    Value: 
+      Fn::GetAtt: [ "DBPrimary" , "Endpoint.Address" ]
+    Export:
+      Name: !Sub "${GalleryId}:RDB:EndpointAddress"

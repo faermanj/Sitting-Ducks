@@ -20,7 +20,7 @@ Parameters:
 Resources:
   FiboGenFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Events:
         FiboGenFnApi:
           Properties:
@@ -32,7 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboIterFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Events:
         FiboIterApi:
           Properties:
@@ -44,7 +44,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboMemoFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Events:
         FiboMemoApi:
           Properties:
@@ -56,7 +56,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboRecFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Events:
         FiboRecApi:
           Properties:
@@ -68,7 +68,7 @@ Resources:
     Type: AWS::Serverless::Function
   HelloFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Events:
         HelloApi:
           Properties:
@@ -78,21 +78,42 @@ Resources:
       Handler: sducks.lambdas.hello
       Runtime: python3.6
     Type: AWS::Serverless::Function
-  PutRandFn:
+  PutRandDDBFn:
     Properties:
-      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
       Environment:
         Variables:
           RAND_TABLE_NAME:
             Fn::ImportValue:
               Fn::Sub: ${GalleryId}:DDB:RandTable
       Events:
-        PutRandFnApi:
+        PutRandDDBFnApi:
           Properties:
             Method: get
-            Path: /put_rand
+            Path: /put_rand_ddb
           Type: Api
-      Handler: sducks.lambdas.put_rand
+      Handler: sducks.lambdas.put_rand_ddb
+      Role:
+        Fn::GetAtt:
+        - PutRandRole
+        - Arn
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  PutRandRDBFn:
+    Properties:
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/5fc4fa70779a3eae697a73a723f6cba9
+      Environment:
+        Variables:
+          DB_HOST:
+            Fn::ImportValue:
+              Fn::Sub: ${GalleryId}:RDB:EndpointAddress
+      Events:
+        PutRandRDBFnApi:
+          Properties:
+            Method: get
+            Path: /put_rand_rdb
+          Type: Api
+      Handler: sducks.lambdas.put_rand_rdb
       Role:
         Fn::GetAtt:
         - PutRandRole
@@ -114,7 +135,10 @@ Resources:
       Policies:
       - PolicyDocument:
           Statement:
-          - Action: dynamodb:*
+          - Action:
+            - dynamodb:*
+            - cloudwatch:*
+            - logs:*
             Effect: Allow
             Resource: '*'
           Version: '2012-10-17'

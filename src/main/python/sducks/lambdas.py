@@ -5,8 +5,9 @@ import boto3
 import os
 from sducks.fibo import fib_gen, fib_iter, fib_rec, fib_memo
 from sducks.gateway import apigw
+import mysql.connector
 
-max = 9223372036854775807
+max = 999999999
 pp = pprint.PrettyPrinter(indent=4)
 dynamodb = boto3.resource('dynamodb')
 
@@ -16,7 +17,31 @@ def hello(event, context):
     return gw.ok("Hello World!")
 
 
-def put_rand(event, context):
+def put_rand_rdb(event, context):
+    gw = apigw(event, context)
+    rand = random.randint(0, max)
+    db_host = os.environ['DB_HOST']
+    conn = mysql.connector.connect(
+        host=db_host,
+        user="root",
+        passwd="Masterkey123")
+    print(conn)
+    cursor = conn.cursor()
+    cursor.execute("create database if not exists sducks")
+    cursor.execute(
+        "create table if not exists sducks.rands(rand integer primary key)")
+    sql = "insert into sducks.rands(rand) values (%(rand)s)"
+    params = {
+        'rand': rand
+    }
+    cursor.execute(sql, params)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return gw.ok("Inserted "+str(rand)+" to endpoint "+db_host)
+
+
+def put_rand_ddb(event, context):
     gw = apigw(event, context)
     rand_table_name = os.environ['RAND_TABLE_NAME']
     rand = random.randint(0, max)

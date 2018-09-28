@@ -98,13 +98,16 @@ Resources:
                     Statement:
                         - 
                           Effect: Allow
-                          Action: "dynamodb:*"
+                          Action: 
+                            - "dynamodb:*"
+                            - "cloudwatch:*"
+                            - "logs:*"
                           Resource: "*"
-    PutRandFn:
+    PutRandDDBFn:
         Type: AWS::Serverless::Function
         Properties:
             CodeUri: ./src/main/python/
-            Handler: sducks.lambdas.put_rand
+            Handler: sducks.lambdas.put_rand_ddb
             Runtime: python3.6
             Role: !GetAtt "PutRandRole.Arn"
             Environment:
@@ -114,11 +117,29 @@ Resources:
                             !Sub "${GalleryId}:DDB:RandTable"
 
             Events:
-                PutRandFnApi:
+                PutRandDDBFnApi:
                     Type: Api
                     Properties:
-                        Path: /put_rand
-                        Method: get    
+                        Path: /put_rand_ddb
+                        Method: get
+    PutRandRDBFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.put_rand_rdb
+            Runtime: python3.6
+            Role: !GetAtt "PutRandRole.Arn"
+            Environment:
+                Variables:
+                    DB_HOST:
+                        Fn::ImportValue: 
+                            !Sub "${GalleryId}:RDB:EndpointAddress"            
+            Events:
+                PutRandRDBFnApi:
+                    Type: Api
+                    Properties:
+                        Path: /put_rand_rdb
+                        Method: get                            
 Outputs:
     SittingDuck:
       Description: "API endpoint! Shoot!"
