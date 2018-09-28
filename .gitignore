@@ -1,6 +1,10 @@
 
 # Created by https://www.gitignore.io/api/linux,python,jupyternotebook
 
+artifacts
+*.out.yml
+.vscode
+
 ### JupyterNotebook ###
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
@@ -155,3 +159,4 @@ load_testing_101.out.yml
 load_testing_101.out.yml
 cfn-beanstalk-env.out.yml
 cfn-base-ha-vpc.json
+.vscode/settings.json
