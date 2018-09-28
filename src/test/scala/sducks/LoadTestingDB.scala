@@ -5,7 +5,7 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
 //export JAVA_OPTS="-Dusers=10 -Dramp=15 -Dtarget=http://localhost:3000"
-class LoadTestingSls extends Simulation {
+class LoadTestingDB extends Simulation {
   val users = Integer.getInteger("users", 1)
   val ramp = java.lang.Long.getLong("ramp", 0L)
   val target = System.getProperty("target","http://localhost")
