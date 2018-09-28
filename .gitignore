@@ -160,3 +160,4 @@ load_testing_101.out.yml
 cfn-beanstalk-env.out.yml
 cfn-base-ha-vpc.json
 .vscode/settings.json
+artifacts/artifacts.zip
