@@ -13,10 +13,14 @@ Outputs:
     Description: API endpoint! Shoot!
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+Parameters:
+  GalleryId:
+    Default: devtest
+    Type: String
 Resources:
   FiboGenFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
       Events:
         FiboGenFnApi:
           Properties:
@@ -28,7 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboIterFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
       Events:
         FiboIterApi:
           Properties:
@@ -40,7 +44,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboMemoFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
       Events:
         FiboMemoApi:
           Properties:
@@ -52,7 +56,7 @@ Resources:
     Type: AWS::Serverless::Function
   FiboRecFn:
     Properties:
-      CodeUri: s3://devenv-201237-artifacts-artifactsbucket-1g9am4kak8m09/d6b31bceaec57772c22d62077936c728
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
       Events:
         FiboRecApi:
           Properties:
@@ -62,4 +66,58 @@ Resources:
       Handler: sducks.lambdas.fibo_rec
       Runtime: python3.6
     Type: AWS::Serverless::Function
+  HelloFn:
+    Properties:
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      Events:
+        HelloApi:
+          Properties:
+            Method: get
+            Path: /
+          Type: Api
+      Handler: sducks.lambdas.hello
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  PutRandFn:
+    Properties:
+      CodeUri: s3://devenv-170805-artifacts-artifactsbucket-n12hv9fr7vpv/8f3f9bf90d27da462563e683e11d42c9
+      Environment:
+        Variables:
+          RAND_TABLE_NAME:
+            Fn::ImportValue:
+              Fn::Sub: ${GalleryId}:DDB:RandTable
+      Events:
+        PutRandFnApi:
+          Properties:
+            Method: get
+            Path: /put_rand
+          Type: Api
+      Handler: sducks.lambdas.put_rand
+      Role:
+        Fn::GetAtt:
+        - PutRandRole
+        - Arn
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  PutRandRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: root
+    Type: AWS::IAM::Role
 Transform: AWS::Serverless-2016-10-31

@@ -151,3 +151,13 @@ Outputs:
     Value: !Ref SubnetPvtB
     Export:
       Name: !Sub ${GalleryId}:SubnetPvtB:Id
+  PubRouteTableId:
+    Description: PubRouteTableId
+    Value: !Ref PubRouteTable
+    Export:
+      Name: !Sub ${GalleryId}:PubRouteTable:Id
+  PvtRouteTableId:
+    Description: PvtRouteTableId
+    Value: !Ref PvtRouteTable
+    Export:
+      Name: !Sub ${GalleryId}:PvtRouteTable:Id

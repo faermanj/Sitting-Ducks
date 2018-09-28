@@ -4,9 +4,10 @@ Outputs:
       Name:
         Fn::Sub: ${GalleryId}:EB:${EnvName}:EndpointURL
     Value:
-      Fn::GetAtt:
-      - EBEnvironment
-      - EndpointURL
+      Fn::Sub: http://${EBEnvironment.EndpointURL}
+  SittingDuck:
+    Value:
+      Fn::Sub: http://${EBEnvironment.EndpointURL}
 Parameters:
   EnvName:
     Default: aoienv
@@ -24,8 +25,8 @@ Resources:
         Fn::ImportValue:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
-        S3Bucket: sitting-ducks-codebuild
-        S3Key: 9c09519528345c63df19f22101e2533f
+        S3Bucket: devenv-175015-artifacts-artifactsbucket-818lk0xtmd2s
+        S3Key: a94f1035355cf1a2c8b834a557f0547e
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:
@@ -36,6 +37,15 @@ Resources:
       EnvironmentName:
         Ref: EnvName
       OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: ServiceRole
+        Value: aws-elasticbeanstalk-service-role
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: LoadBalancerType
+        Value: application
       - Namespace: aws:autoscaling:launchconfiguration
         OptionName: InstanceType
         Value:

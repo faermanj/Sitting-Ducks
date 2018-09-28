@@ -10,10 +10,8 @@ export STACK_NAME="$GALLERY_ID-$COMPONENT_ID-$UNIQUE"
 export SRC_TEMPLATE="cfn-${COMPONENT_ID}.yml"
 export OUT_TEMPLATE="cfn-${COMPONENT_ID}.out.yml"
 
-aws cloudformation package \
---template $SRC_TEMPLATE \
---s3-bucket $BUCKET_NAME \
---output-template-file $OUT_TEMPLATE
+#./codebuild.sh
+./build.sh
 
 cfn-lint -t $OUT_TEMPLATE
 

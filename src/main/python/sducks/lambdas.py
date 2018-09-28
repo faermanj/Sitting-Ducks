@@ -1,8 +1,31 @@
 import json
 import pprint
+import random
+import boto3
+import os
 from sducks.fibo import fib_gen, fib_iter, fib_rec, fib_memo
 from sducks.gateway import apigw
+
+max = 9223372036854775807
 pp = pprint.PrettyPrinter(indent=4)
+dynamodb = boto3.resource('dynamodb')
+
+
+def hello(event, context):
+    gw = apigw(event, context)
+    return gw.ok("Hello World!")
+
+
+def put_rand(event, context):
+    gw = apigw(event, context)
+    rand_table_name = os.environ['RAND_TABLE_NAME']
+    rand = random.randint(0, max)
+    table = dynamodb.Table(rand_table_name)
+    item = {
+        'rand': rand
+    }
+    table.put_item(Item=item)
+    return gw.ok("random number "+str(rand)+" put to table "+rand_table_name)
 
 
 def fibo_iter(event, context):

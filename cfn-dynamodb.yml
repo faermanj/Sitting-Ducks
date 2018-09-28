@@ -1,0 +1,116 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+Resources:
+  RandTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "rand"
+          AttributeType: "N"
+      KeySchema: 
+        - 
+          AttributeName: "rand"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"  
+        WriteCapacityUnits: "5"
+  DDBEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action:
+              - 'dynamodb:*'
+            Resource:
+              - '*'
+      RouteTableIds:
+        - Fn::ImportValue: !Sub "${GalleryId}:PubRouteTable:Id"
+        - Fn::ImportValue: !Sub "${GalleryId}:PvtRouteTable:Id"
+      ServiceName: !Join 
+        - ''
+        - - com.amazonaws.
+          - !Ref 'AWS::Region'
+          - .dynamodb
+      VpcId:
+        Fn::ImportValue: 
+          !Sub "${GalleryId}:VPC:Id"
+  ScalingRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+        - 
+          Effect: Allow
+          Principal: 
+            Service: 
+              - "application-autoscaling.amazonaws.com"
+          Action: 
+            - "sts:AssumeRole"
+      Path: "/"
+      Policies: 
+        - 
+          PolicyName: root
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+            - 
+              Effect: Allow
+              Action:          
+                - "dynamodb:*"
+              Resource: "*"
+  RandTableWriteCapacityScalableTarget: 
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties: 
+      MaxCapacity: 100
+      MinCapacity: 5   
+      ResourceId: !Sub table/${RandTable}
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:WriteCapacityUnits"
+      ServiceNamespace: dynamodb
+  RandTableWriteScalingPolicy: 
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties: 
+      PolicyName: WriteAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: 
+        Ref: RandTableWriteCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration: 
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization
+  RandTableReadCapacityScalableTarget: 
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties: 
+      MaxCapacity: 100
+      MinCapacity: 5   
+      ResourceId: !Sub table/${RandTable}
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:ReadCapacityUnits"
+      ServiceNamespace: dynamodb
+  RandTableReadScalingPolicy: 
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties: 
+      PolicyName: ReadAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: 
+        Ref: RandTableReadCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration: 
+        TargetValue: 65
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: DynamoDBReadCapacityUtilization        
+Outputs:
+  RandTableName:
+    Value: !Ref "RandTable"
+    Export:
+      Name: !Sub "${GalleryId}:DDB:RandTable"

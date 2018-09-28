@@ -9,8 +9,24 @@ Globals:
     Function:
         Timeout: 10
         MemorySize: 128
-
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
 Resources:
+    HelloFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.hello
+            Runtime: python3.6
+            Events:
+                HelloApi:
+                    Type: Api
+                    Properties:
+                        Path: /
+                        Method: get
+
     FiboIterFn:
         Type: AWS::Serverless::Function
         Properties:
@@ -59,6 +75,50 @@ Resources:
                     Properties:
                         Path: /fib_gen
                         Method: get
+    
+    PutRandRole:
+        Type: AWS::IAM::Role
+        Properties:
+            Path: "/"
+            AssumeRolePolicyDocument: 
+                Version: "2012-10-17"
+                Statement: 
+                - 
+                    Effect: "Allow"
+                    Principal: 
+                        Service: 
+                            - "lambda.amazonaws.com"
+                    Action: 
+                        - "sts:AssumeRole"
+            Policies:
+                - 
+                  PolicyName: root
+                  PolicyDocument:
+                    Version: '2012-10-17'
+                    Statement:
+                        - 
+                          Effect: Allow
+                          Action: "dynamodb:*"
+                          Resource: "*"
+    PutRandFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./src/main/python/
+            Handler: sducks.lambdas.put_rand
+            Runtime: python3.6
+            Role: !GetAtt "PutRandRole.Arn"
+            Environment:
+                Variables:
+                    RAND_TABLE_NAME:
+                        Fn::ImportValue: 
+                            !Sub "${GalleryId}:DDB:RandTable"
+
+            Events:
+                PutRandFnApi:
+                    Type: Api
+                    Properties:
+                        Path: /put_rand
+                        Method: get    
 Outputs:
     SittingDuck:
       Description: "API endpoint! Shoot!"
