@@ -1,0 +1,34 @@
+
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+Resources:
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to client host
+      VpcId:
+        Fn::ImportValue: 
+          !Sub "${GalleryId}:VPC:Id"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 3306
+        ToPort: 3306
+        CidrIp: 0.0.0.0/0
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Why is this required?
+      SubnetIds: 
+        - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
+        - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
+  DBCluster:
+      Type: AWS::RDS::DBCluster
+      Properties:
+        Engine: aurora
+        MasterUsername: root
+        MasterUserPassword: Masterkey123
+        DBSubnetGroupName: !Ref DBSubnetGroup
+        VpcSecurityGroupIds:
+          - !Ref DBSecurityGroup
