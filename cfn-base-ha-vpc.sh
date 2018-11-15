@@ -39,6 +39,6 @@ cat <<EOT >> cfn-base-ha-vpc.json
 EOT
 
 aws cloudformation create-stack \
---stack-name $STACK_NAME \
---parameters file://./cfn-${COMPONENT_ID}.json \
---template-body file://./cfn-${COMPONENT_ID}.yml
+--stack-name "$STACK_NAME" \
+--parameters "file://./cfn-${COMPONENT_ID}.json" \
+--template-body "file://./cfn-${COMPONENT_ID}.yml"

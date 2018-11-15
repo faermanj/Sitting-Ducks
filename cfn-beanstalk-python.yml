@@ -1,0 +1,70 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+  EnvName:
+    Type: String
+    Default: aoienv
+  InstanceType:
+    Type: String
+    Default: t2.micro
+
+Resources:
+  EBApplicationVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName:
+        Fn::ImportValue: 
+          !Sub "${GalleryId}:EB:ApplicationName"
+      #`aws cloudformation package` command will upload this to S3 
+      #  and replace the bucket and key in the output template
+      SourceBundle: './src/main/python'
+
+  EBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: 
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ApplicationName"
+      EnvironmentName: !Ref EnvName
+      Description: The application to be deployed to the environment.
+      TemplateName:
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ConfigurationTemplate"
+      VersionLabel: !Ref 'EBApplicationVersion'
+      OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: ServiceRole
+        Value: aws-elasticbeanstalk-service-role
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: LoadBalancerType
+        Value: application
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: InstanceType
+        Value: !Ref 'InstanceType'
+#      - Namespace: aws:autoscaling:launchconfiguration
+#        OptionName: EC2KeyName
+#        Value: AvoidThisInProd
+      - Namespace: aws:ec2:vpc
+        OptionName: VPCId
+        Value:
+          Fn::ImportValue: 
+            !Sub "${GalleryId}:VPC:Id"
+      - Namespace: 'aws:ec2:vpc'
+        OptionName: Subnets
+        Value:
+          Fn::Join:
+          - ","
+          - - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
+            - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
+Outputs:
+  SittingDuck:
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
+  EBEndpointURL:
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
+    Export:
+      Name: !Sub "${GalleryId}:EB:${EnvName}:EndpointURL"
+

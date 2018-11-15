@@ -10,7 +10,7 @@ export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$COMPONENT_ID}"
 aws cloudformation create-stack \
 --stack-name $STACK_NAME \
 --parameters "ParameterKey=GalleryId,ParameterValue=$GALLERY_ID" \
---template-body file://./cfn-${COMPONENT_ID}.yml
+--template-body "file://./cfn-${COMPONENT_ID}.yml"
 
 aws cloudformation wait stack-create-complete \
 --stack-name $STACK_NAME

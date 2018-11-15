@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+Description: A VPC with redundant public and private subnets
 Parameters:
   GalleryId:
     Type: String
@@ -6,25 +6,30 @@ Parameters:
   CidrBlock:
     Type: String
     Default: 192.168.0.0/16
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
   SubnetPubACidr:
     Type: String
     Default: 192.168.1.0/24
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
   SubnetPubBCidr:
     Type: String
     Default: 192.168.3.0/24
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
   SubnetPvtACidr:
     Type: String
     Default: 192.168.2.0/24
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
   SubnetPvtBCidr:
     Type: String
     Default: 192.168.4.0/24
+    AllowedPattern: '((\d{1,3})\.){3}\d{1,3}/\d{1,2}'
 Resources:
   EnvironmentVPC:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref CidrBlock
-      EnableDnsSupport: 'true'
-      EnableDnsHostnames: 'true'
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
       InstanceTenancy: default
   SubnetPubA:
     Type: AWS::EC2::Subnet
@@ -73,13 +78,16 @@ Resources:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref EnvironmentVPC
-  PvtRouteTable:
+  PvtRouteTableA:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref EnvironmentVPC
+  PvtRouteTableB:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref EnvironmentVPC      
   PubToInternet:
     Type: AWS::EC2::Route
-    DependsOn: GatewayToInternet
     Properties:
       RouteTableId: !Ref PubRouteTable
       DestinationCidrBlock: 0.0.0.0/0
@@ -98,33 +106,54 @@ Resources:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref SubnetPvtA
-      RouteTableId: !Ref PvtRouteTable
+      RouteTableId: !Ref PvtRouteTableA
   PvtBRouteTableAssociaton:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref SubnetPvtB
-      RouteTableId: !Ref PvtRouteTable                  
-  NatGateway:
+      RouteTableId: !Ref PvtRouteTableB             
+  NatGatewayA:
     Type: AWS::EC2::NatGateway
     Properties:
       AllocationId:
         Fn::GetAtt:
-        - EIP
+        - EIPNatA
         - AllocationId
       SubnetId:
         Ref: SubnetPubA
-  EIP:
+  NatGatewayB:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId:
+        Fn::GetAtt:
+        - EIPNatB
+        - AllocationId
+      SubnetId:
+        Ref: SubnetPubB
+  EIPNatA:
     Type: AWS::EC2::EIP
     Properties:
       Domain: vpc
-  NatRoute:
+  EIPNatB:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc      
+  NatRouteA:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId:
-        Ref: PvtRouteTable
+        Ref: PvtRouteTableA
       DestinationCidrBlock: 0.0.0.0/0
       NatGatewayId:
-        Ref: NatGateway
+        Ref: NatGatewayA
+  NatRouteB:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: PvtRouteTableB
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: NatGatewayB        
 Outputs:
   VPCId:
     Description: VPCId
@@ -156,8 +185,13 @@ Outputs:
     Value: !Ref PubRouteTable
     Export:
       Name: !Sub ${GalleryId}:PubRouteTable:Id
-  PvtRouteTableId:
-    Description: PvtRouteTableId
-    Value: !Ref PvtRouteTable
+  PvtRouteTableAId:
+    Description: PvtRouteTableAId
+    Value: !Ref PvtRouteTableA
     Export:
-      Name: !Sub ${GalleryId}:PvtRouteTable:Id
+      Name: !Sub ${GalleryId}:PvtRouteTableA:Id
+  PvtRouteTableBId:
+    Description: PvtRouteTableBId
+    Value: !Ref PvtRouteTableB
+    Export:
+      Name: !Sub ${GalleryId}:PvtRouteTableB:Id      

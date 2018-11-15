@@ -18,6 +18,9 @@ Parameters:
   InstanceType:
     Default: t2.micro
     Type: String
+  SourceBundleDir:
+    Default: ./src/main/python
+    Type: String
 Resources:
   EBApplicationVersion:
     Properties:
@@ -25,8 +28,7 @@ Resources:
         Fn::ImportValue:
           Fn::Sub: ${GalleryId}:EB:ApplicationName
       SourceBundle:
-        S3Bucket: devenv-175015-artifacts-artifactsbucket-818lk0xtmd2s
-        S3Key: a94f1035355cf1a2c8b834a557f0547e
+        Ref: SourceBundleDir
     Type: AWS::ElasticBeanstalk::ApplicationVersion
   EBEnvironment:
     Properties:

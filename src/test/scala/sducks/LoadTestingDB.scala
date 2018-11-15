@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-//export JAVA_OPTS="-Dusers=4 -Dramp=30 -Dgatling.core.runDescription=DB -Dtarget=https://p4zodfe7u4.execute-api.us-east-1.amazonaws.com/Prod/"
+//export JAVA_OPTS="-Dusers=4 -Dramp=30 -Dgatling.core.runDescription=DB -Dtarget=https://ubc51c33ea.execute-api.us-east-1.amazonaws.com/Prod/"
 //sbt "gatling:testOnly sducks.LoadTestingDB"
 class LoadTestingDB extends Simulation {
   val users = Integer.getInteger("users", 1)

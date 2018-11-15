@@ -83,8 +83,8 @@ Resources:
         Ref: RandTableWriteCapacityScalableTarget
       TargetTrackingScalingPolicyConfiguration: 
         TargetValue: 70
-        ScaleInCooldown: 60
-        ScaleOutCooldown: 60
+        ScaleInCooldown: 30
+        ScaleOutCooldown: 30
         PredefinedMetricSpecification: 
           PredefinedMetricType: DynamoDBWriteCapacityUtilization
   RandTableReadCapacityScalableTarget: 

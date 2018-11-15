@@ -1,6 +1,8 @@
 Parameters:
+  #Most people call this "Environment". Using "Gallery" to disambituate from AWS ElasticBeanstalk Environments.
   GalleryId:
     Type: String
+    Description: An identier to correlate several AWS resources in different stacks.
     Default: devtest
 Resources:
   ArtifactsBucket:
@@ -9,5 +11,7 @@ Outputs:
   ArtifactsBucketName:
     Description: ArtifactsBucketName
     Value: !Ref ArtifactsBucket
+    #Export cross-stack references for modular architectures
     Export:
+      #Use a consistent naming convention in export names
       Name: !Sub "${GalleryId}:ArtifactsBucketName"
