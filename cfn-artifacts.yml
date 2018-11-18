@@ -7,6 +7,9 @@ Parameters:
 Resources:
   ArtifactsBucket:
     Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: "index.html"
 Outputs:
   ArtifactsBucketName:
     Description: ArtifactsBucketName

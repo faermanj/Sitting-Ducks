@@ -1,0 +1,54 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: "devtest"
+  AppName:
+    Type: String
+    Default: "SittingDucks"
+
+
+Resources:
+  EBInstanceProfileRole:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "ec2.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: /
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
+
+
+  EBInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      Path: /
+      Roles:
+        - !Ref EBInstanceProfileRole
+
+  EBApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: !Sub '${GalleryId}_${AppName}'
+
+Outputs:
+  EBApplicationName:
+    Description: EBApplicationName
+    Value: !Ref EBApplication
+    Export:
+      Name: !Sub ${GalleryId}:EB:ApplicationName
+  EBInstanceProfileId:
+    Description: EBInstanceProfileId
+    Value: !Ref EBInstanceProfile
+    Export:
+      Name: !Sub ${GalleryId}:EB:InstanceProfileId
+

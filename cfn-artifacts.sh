@@ -5,8 +5,8 @@ export COMPONENT_ID="artifacts"
 
 export UNIQUE=$(date '+%H%M%S')
 export GALLERY_ID="${GALLERY_ID:-devenv-$UNIQUE}"
-export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$COMPONENT_ID}"
 
+export STACK_NAME="${STACK_NAME:-$GALLERY_ID-$COMPONENT_ID}"
 aws cloudformation create-stack \
 --stack-name $STACK_NAME \
 --parameters "ParameterKey=GalleryId,ParameterValue=$GALLERY_ID" \
@@ -21,5 +21,11 @@ BUCKET_NAME=$(aws cloudformation describe-stacks \
     --output text
 )
 
+LOCAL_DIR="./src/main/html/hello"
+aws s3 cp "$LOCAL_DIR" "s3://$BUCKET_NAME" \
+    --recursive \
+    --acl public-read
+
 echo "export GALLERY_ID=$GALLERY_ID"
 echo "export BUCKET_NAME=$BUCKET_NAME"
+echo "export WEBSITE=http://$BUCKET_NAME.s3-website.$(aws configure get region).amazonaws.com"

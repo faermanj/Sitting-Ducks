@@ -161,3 +161,7 @@ cfn-beanstalk-env.out.yml
 cfn-base-ha-vpc.json
 .vscode/settings.json
 artifacts/artifacts.zip
+.idea/*
+.classpath
+.project
+.settings/*

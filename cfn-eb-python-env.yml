@@ -1,0 +1,114 @@
+Parameters:
+  GalleryId:
+    Type: String
+    Default: devtest
+  EnvName:
+    Type: String
+    Default: aoienv
+  InstanceType:
+    Type: String
+    Default: t2.micro
+  SolutionStack:
+    Type: String
+    Default: "64bit Amazon Linux 2018.03 v2.7.6 running Python 3.6"
+  AsgMinSize:
+    Type: String
+    Default: "2"
+  AsgMaxSize:
+    Type: String
+    Default: "10"
+
+Resources:
+  EBConfigurationTemplate:
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+    Properties:
+      ApplicationName:
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ApplicationName"
+      SolutionStackName: !Ref SolutionStack
+      OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      - Namespace: aws:elasticbeanstalk:healthreporting:system
+        OptionName: SystemType
+        Value: enhanced
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: MonitoringInterval
+        Value: "1 minute"
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: IamInstanceProfile
+        Value: 
+          Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:InstanceProfileId"
+      - Namespace: aws:autoscaling:asg
+        OptionName: MinSize
+        Value: !Ref AsgMinSize
+      - Namespace: aws:autoscaling:asg
+        OptionName: MaxSize
+        Value: !Ref AsgMaxSize
+
+  EBApplicationVersion:
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
+    Properties:
+      ApplicationName:
+        Fn::ImportValue: 
+          !Sub "${GalleryId}:EB:ApplicationName"
+      #`aws cloudformation package` command will upload this to S3 
+      #  and replace the bucket and key in the output template
+      SourceBundle: './src/main/python'
+
+  EBEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: 
+        Fn::ImportValue: 
+            !Sub "${GalleryId}:EB:ApplicationName"
+      EnvironmentName: !Ref EnvName
+      Description: The application to be deployed to the environment.
+      TemplateName: !Ref EBConfigurationTemplate
+      VersionLabel: !Ref 'EBApplicationVersion'
+      OptionSettings:
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: ServiceRole
+        Value: aws-elasticbeanstalk-service-role
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: EnvironmentType
+        Value: LoadBalanced
+      - Namespace: aws:elasticbeanstalk:environment
+        OptionName: LoadBalancerType
+        Value: application
+      - Namespace: aws:autoscaling:launchconfiguration
+        OptionName: InstanceType
+        Value: !Ref 'InstanceType'
+#      - Namespace: aws:autoscaling:launchconfiguration
+#        OptionName: EC2KeyName
+#        Value: AvoidThisInProd
+      - Namespace: aws:ec2:vpc
+        OptionName: VPCId
+        Value:
+          Fn::ImportValue: 
+            !Sub "${GalleryId}:VPC:Id"
+      - Namespace: 'aws:ec2:vpc'
+        OptionName: Subnets
+        Value:
+          Fn::Join:
+          - ","
+          - - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubA:Id"
+            - Fn::ImportValue: !Sub "${GalleryId}:SubnetPubB:Id"
+      - Namespace: 'aws:elasticbeanstalk:container:python'
+        OptionName: WSGIPath
+        Value: sducks/application.py
+Outputs:
+  SittingDuck:
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
+  EBEndpointURL:
+    Value: !Sub "http://${EBEnvironment.EndpointURL}"
+    Export:
+      Name: !Sub "${GalleryId}:EB:${EnvName}:EndpointURL"
+  EBTemplateName:
+    Description: EBConfigurationTemplate
+    Value: !Ref EBConfigurationTemplate
+    Export:
+      Name: !Sub ${GalleryId}:EB:ConfigurationTemplate      
+

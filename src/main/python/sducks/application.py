@@ -3,7 +3,7 @@ import json
 from flask import Flask, Response, request
 from sducks.flaskrun import flaskrun
 from sducks.fibo import fib_gen, fib_iter, fib_rec, fib_memo
-from sducks.    gateway import flaskgw
+from sducks.gateway import flaskgw
 
 application = Flask(__name__, static_url_path='/static')
 version = "2018-08-26T164315"
